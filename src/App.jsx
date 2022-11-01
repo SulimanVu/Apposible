@@ -1,8 +1,18 @@
+import { Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+import Main from "./pages/Main/Main";
+import User from "./pages/User/User";
 
 function App() {
   return (
     <div className="App">
-        Start
+      <Header />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/user/:id" element={<User />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }
