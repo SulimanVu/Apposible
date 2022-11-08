@@ -1,0 +1,32 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  .you {
+    width: 60%;
+    background-color: gray;
+    align-self: flex-end;
+  }
+  .outher {
+    width: 60%;
+    background-color: black;
+    color: #fff;
+    align-self: flex-start;
+  }
+}
+.body div {
+  position: relative;
+  height: fit-content;
+  padding: 5px 5px 0;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+.comment_footer {
+  width: 102%;
+  margin-left: -5px;
+  position: absolute;
+  bottom: -12px;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+}

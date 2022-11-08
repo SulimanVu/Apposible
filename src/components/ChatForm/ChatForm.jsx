@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Chat from "../ChatMessage/Chat";
 import io from "socket.io-client";
+import styles from "./chatform.module.scss";
 
 const socket = io.connect(`http://localhost:3001`);
-
 
 const ChatForm = () => {
   const [username, setUsername] = useState("");
@@ -11,15 +11,16 @@ const ChatForm = () => {
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
-      socket.emit("join_room", { room });
+      socket.emit("join_room", room);
     }
   };
 
   return (
-    <div>
+    <div className={styles.window}>
+      <Chat socket={socket} username={username} room={room} />
       <input
         type="text"
-        placeholder="message..."
+        placeholder="User..."
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
@@ -30,8 +31,6 @@ const ChatForm = () => {
         onChange={(e) => setRoom(e.target.value)}
       />
       <button onClick={joinRoom}>Click me</button>
-      <h1>Message Recived</h1>
-      <Chat socket={socket} username={username} room={room} />
     </div>
   );
 };

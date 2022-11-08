@@ -6,7 +6,7 @@ const Chat = ({ socket, username, room }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
-  const sendMessage = async () => {
+  const sendMessage = () => {
     if (currentMessage !== "") {
       const messageData = {
         room: room,
@@ -18,16 +18,19 @@ const Chat = ({ socket, username, room }) => {
           new Date(Date.now()).getMinutes(),
       };
 
-      await socket.emit("send_message", messageData);
+      socket.emit("send_message", messageData);
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage("");
     }
   };
+
   useEffect(() => {
-    socket.on("recive_message", (data) => {
-      setMessageList((list)=> [...list, data])
+    socket.on("receive_message", (data) => {
+      console.log(111);
+      setMessageList((list) => [...list, data]);
     });
   }, [socket]);
+
   return (
     <div>
       <div className={styles.header}>
@@ -44,11 +47,11 @@ const Chat = ({ socket, username, room }) => {
             >
               <div>
                 <div>
-                  <p>{messageContent.message}</p>
+                  <span>{messageContent.message}</span>
                 </div>
-                <div>
-                  <p className={styles.time}>{messageContent.time}</p>
-                  <p className={styles.author}>{messageContent.author}</p>
+                <div className={styles.comment_footer}>
+                  <span className={styles.time}>{messageContent.time}</span>
+                  <span className={styles.author}>{messageContent.author}</span>
                 </div>
               </div>
             </div>
@@ -60,14 +63,12 @@ const Chat = ({ socket, username, room }) => {
           type="text"
           value={currentMessage}
           placeholder="Hey..."
-          onChange={(e) => {
-            setCurrentMessage(e.target.value);
-          }}
+          onChange={(e) => setCurrentMessage(e.target.value)}
           onKeyDown={(e) => {
             e.key === "Enter" && sendMessage();
           }}
         />
-        <button onClick={()=>sendMessage()}>&#9658;</button>
+        <button onClick={sendMessage}>&#9658;</button>
       </div>
     </div>
   );
