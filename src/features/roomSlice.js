@@ -24,7 +24,7 @@ export const createRoom = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: name, users: id }),
+        body: JSON.stringify({ name, access: id }),
       });
       const room = await res.json();
       return room;
@@ -44,8 +44,8 @@ export const deleteRoom = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-      const room = await res.json();
-      return room;
+      const delRoom = await res.json();
+      return id;
     } catch (error) {
       thunkAPI.rejectWithValue(error);
     }
@@ -54,17 +54,55 @@ export const deleteRoom = createAsyncThunk(
 
 export const addUserRoom = createAsyncThunk(
   "addUser/room",
-  async ({ id, userID }, thunkAPI) => {
+  async ({ id, user }, thunkAPI) => {
     try {
-      const res = await fetch(`http://localhost:3001/room/delete/${id}`, {
+      const res = await fetch(`http://localhost:3001/room/addUser/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ users: userID }),
+        body: JSON.stringify({ user }),
       });
-      const room = await res.json();
-      return userID;
+      const addUser = await res.json();
+      return user;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "deleteUser/room",
+  async ({ id, user }, thunkAPI) => {
+    try {
+      const res = await fetch(`http://localhost:3001/room/deleteUser/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user }),
+      });
+      const delUser = await res.json();
+      return user;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+//////ОБЯЗАТЕЛЬНО ПЕРЕДЕЛАТЬ ЭТОТ THUNK///////////
+export const addComment = createAsyncThunk(
+  "addComment/room",
+  async ({ id, user, comment }, thunkAPI) => {
+    try {
+      const res = await fetch(`http://localhost:3001/room/addComment/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user, comment }),
+      });
+      const addComment = await res.json();
+      return { user, comment };
     } catch (error) {
       thunkAPI.rejectWithValue(error);
     }
@@ -86,32 +124,46 @@ const roomSlice = createSlice({
         state.loader = true;
       })
       .addCase(fetchRoom.rejected, (state, action) => {
-        state.room = action.payload;
         state.loader = false;
+        console.log("slice rejected");
       })
       //////////DELETE-ROOM///////////
       .addCase(deleteRoom.fulfilled, (state, action) => {
-        state.room = action.payload;
+        state.room = state.room.filter((item) => item._id !== action.payload);
         state.loader = false;
       })
       .addCase(deleteRoom.pending, (state, action) => {
         state.loader = true;
       })
       .addCase(deleteRoom.rejected, (state, action) => {
-        state.room = action.payload;
         state.loader = false;
+        console.log("slice rejected");
       })
       //////////ADD-USER-ROOM///////////
       .addCase(addUserRoom.fulfilled, (state, action) => {
-        state.room.users.push(action.payload);
+        state.room.access.push(action.payload);
         state.loader = false;
       })
       .addCase(addUserRoom.pending, (state, action) => {
         state.loader = true;
       })
       .addCase(addUserRoom.rejected, (state, action) => {
-        state.room.users.push(action.payload);
         state.loader = false;
+        console.log("slice rejected");
+      })
+      //////////DELETE-USER-ROOM///////////
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.room.access = state.room.access.filter(
+          (item) => item !== action.payload
+        );
+        state.loader = false;
+      })
+      .addCase(deleteUser.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.loader = false;
+        console.log("slice rejected");
       })
       //////////ADD-ROOM///////////
       .addCase(createRoom.fulfilled, (state, action) => {
@@ -120,6 +172,22 @@ const roomSlice = createSlice({
       })
       .addCase(createRoom.pending, (state, action) => {
         state.loader = true;
+      })
+      .addCase(createRoom.rejected, (state, action) => {
+        state.loader = false;
+        console.log("slice rejected");
+      })
+      //////////ADD-COMMENT///////////
+      .addCase(addComment.fulfilled, (state, action) => {
+        state.room.users.push(action.payload);
+        state.loader = false;
+      })
+      .addCase(addComment.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(addComment.rejected, (state, action) => {
+        state.loader = false;
+        console.log("slice rejected");
       });
   },
 });
