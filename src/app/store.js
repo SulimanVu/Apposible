@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import user from  '../features/userSlice'
+import application from  '../features/applicationSlice'
+import room from "../features/roomSlice"
 
 export const store = configureStore({
     reducer:{
-        user
+        application,
+        room
     }
 })
