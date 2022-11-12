@@ -7,7 +7,14 @@ const initialState = {
 
 export const fetchRoom = createAsyncThunk("fetch/room", async (_, thunkAPI) => {
   try {
-    const res = await fetch(`http://localhost:3001/room`);
+    const token = localStorage.getItem("token");
+    const res = await fetch(`http://localhost:3001/room`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
     const room = await res.json();
     return room;
   } catch (error) {
@@ -19,10 +26,12 @@ export const createRoom = createAsyncThunk(
   "create/room",
   async ({ id, name }, thunkAPI) => {
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch(`http://localhost:3001/room/create/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ name, access: id }),
       });
@@ -38,10 +47,12 @@ export const deleteRoom = createAsyncThunk(
   "delete/room",
   async (id, thunkAPI) => {
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch(`http://localhost:3001/room/delete/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
       });
       const delRoom = await res.json();
@@ -56,10 +67,12 @@ export const addUserRoom = createAsyncThunk(
   "addUser/room",
   async ({ id, user }, thunkAPI) => {
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch(`http://localhost:3001/room/addUser/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ user }),
       });
@@ -75,10 +88,12 @@ export const deleteUser = createAsyncThunk(
   "deleteUser/room",
   async ({ id, user }, thunkAPI) => {
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch(`http://localhost:3001/room/deleteUser/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ user }),
       });
@@ -94,15 +109,17 @@ export const addComment = createAsyncThunk(
   "addComment/room",
   async ({ id, user, comment }, thunkAPI) => {
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch(`http://localhost:3001/room/addComment/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ user, comment }),
       });
       const addComment = await res.json();
-      return { user, comment };
+      return { _id: id, user, comment };
     } catch (error) {
       thunkAPI.rejectWithValue(error);
     }
@@ -179,7 +196,12 @@ const roomSlice = createSlice({
       })
       //////////ADD-COMMENT///////////
       .addCase(addComment.fulfilled, (state, action) => {
-        state.room.users.push(action.payload);
+        state.room = state.room.map((item) => {
+          if (item._id === action.payload._id) {
+            item.users.push(action.payload);
+          }
+          return item;
+        });
         state.loader = false;
       })
       .addCase(addComment.pending, (state, action) => {

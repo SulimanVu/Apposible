@@ -6,7 +6,7 @@ import { authSignIn } from "../../features/applicationSlice";
 import styles from "../Registr/signup.module.scss";
 
 const SignIn = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,7 @@ const SignIn = () => {
     setPassword("");
     setLogin("");
     dispatch(authSignIn({ login, password }));
-    navigate('/')
+    navigate("/");
   };
 
   const handleClick = () => {

@@ -8,8 +8,8 @@ const initialState = {
   avatar: localStorage.getItem("avatar"),
 };
 
-export const authSignUp = createAsyncThunk(
-  "auth/signup",
+export const authSignIn = createAsyncThunk(
+  "auth/signin",
   async ({ login, password }, thunkAPI) => {
     try {
       const res = await fetch("http://localhost:3001/api/auth/login", {
@@ -23,11 +23,12 @@ export const authSignUp = createAsyncThunk(
       if (data.error) {
         return thunkAPI.rejectWithValue(data.error);
       }
+      console.log(data);
       localStorage.setItem("token", data.token);
-      localStorage.setItem("id", data.id);
-      localStorage.setItem("login", data.login);
-      localStorage.setItem("avatar", data.avatar);
-      localStorage.setItem("name", data.name);
+      localStorage.setItem("id", data.user._id);
+      localStorage.setItem("login", data.user.login);
+      // localStorage.setItem("avatar", data.avatar);
+      localStorage.setItem("name", data.user.name);
 
       return data;
     } catch (error) {
@@ -36,8 +37,8 @@ export const authSignUp = createAsyncThunk(
   }
 );
 
-export const authSignIn = createAsyncThunk(
-  "auth/signIn",
+export const authSignUp = createAsyncThunk(
+  "auth/signUp",
   async ({ login, password, name, email, avatar }, thunkAPI) => {
     try {
       const res = await fetch("http://localhost:3001/api/auth/registr", {
@@ -66,12 +67,10 @@ const applicationSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(authSignUp.fulfilled, (state, action) => {
-        state.token = action.payload.token;
-        state.userId = action.payload.id;
-        state.user = action.payload.name;
-      })
       .addCase(authSignIn.fulfilled, (state, action) => {
+        state.token = action.payload.token;
+      })
+      .addCase(authSignUp.fulfilled, (state, action) => {
         state.token = action.payload;
       });
   },

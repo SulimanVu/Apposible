@@ -4,14 +4,9 @@ import { useDispatch } from 'react-redux';
 import { authSignUp } from '../../features/applicationSlice';
 import styles from './signup.module.scss'
 
-
-
-
-
 const SignUp = () => {
 
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
     const [mail, setMail] = useState('');
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
@@ -22,10 +17,6 @@ const SignUp = () => {
 
     const handleName = (e) => {
         setName(e.target.value)
-    }
-
-    const handlePhone = (e) => {
-        setPhone(e.target.value)
     }
 
     const handleMail = (e) => {
@@ -44,19 +35,11 @@ const SignUp = () => {
         e.preventDefault();
         setPassword('');
         setName('');
-        setPhone('');
         setMail("");
         setLogin('');
-        dispatch(authSignUp({name, phone, mail, login, password}))
+        dispatch(authSignUp({name, email: mail, login, password}))
         
     }
-
-
-
-
-
-
-
 
    const handleClick = () => {
         setText(!text)
@@ -70,7 +53,6 @@ const SignUp = () => {
                     <h1 className={styles.title}>Sign Up</h1>
                     <form onSubmit={handleSignUp} className={styles.form_signUp}>
                         <input type="text" value={name} placeholder='Имя' onChange={(e) => handleName(e)} className={styles.input}/>
-                        <input type="tel" value={phone} placeholder='Телефон' onChange={(e) => handlePhone(e)} className={styles.input2}/>
                         <input type="email" value={mail} placeholder='Mail' onChange={(e) => handleMail(e)} className={styles.input3}/>
                         <input type="text" value={login} placeholder='Логин' onChange={(e) => handleLogin(e)} className={styles.input4}/>
                         <input type={text ? 'password' : 'text'} value={password} placeholder='Пароль' onChange={(e) => handlePassword(e)} className={styles.input5}/>

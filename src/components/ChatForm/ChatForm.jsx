@@ -8,7 +8,7 @@ import { fetchRoom } from "../../features/roomSlice";
 
 export const socket = io.connect(`http://localhost:3001`);
 
-const ChatForm = ({ name, users, access, roomID }) => {
+const ChatForm = ({ name, roomID }) => {
   const username = useSelector((state) => state.application.login);
 
   const dispath = useDispatch();

@@ -3,7 +3,7 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import ChatWindow from "./pages/ChatWindow/ChatWindow";
 import User from "./pages/User/User";
-import ChatMessage from "./components/ChatMessage/Chat";
+import ChatMessage from "./components/ChatMessage/ChatMessage";
 import FormRegistration from "./pages/FormRegistration/FormRegistration";
 import { useLocation } from "react-router-dom";
 
