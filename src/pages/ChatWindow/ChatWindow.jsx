@@ -15,15 +15,16 @@ const ChatWindow = () => {
 
   return (
     <div>
-      {room.map((item, index) => {
+      {room.map((item) => {
         return (
-          <ChatForm
-            name={item.name}
-            users={item.users}
-            access={item.access}
-            roomID={item._id}
-            id={index}
-          />
+          <div key={item._id}>
+            <ChatForm
+              name={item.name}
+              users={item.users}
+              access={item.access}
+              roomID={item._id}
+            />
+          </div>
         );
       })}
     </div>
