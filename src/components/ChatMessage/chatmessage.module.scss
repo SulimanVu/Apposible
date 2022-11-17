@@ -1,16 +1,45 @@
-.body {
+.main {
+  width: 60%;
+  margin: 10px auto 0;
+  border-radius: 8px;
+  background-color: #0c3b2e;
+  height: 80vh;
+  position: relative;
   display: flex;
   flex-direction: column;
-  .you {
-    width: 60%;
-    background-color: gray;
-    align-self: flex-end;
-  }
-  .outher {
-    width: 60%;
-    background-color: black;
-    color: #fff;
-    align-self: flex-start;
+  .chatForm {
+    height: 90%;
+    overflow: auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+    .scroll {
+      height: 600px;
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+    }
+    .body {
+      display: flex;
+      flex-direction: column;
+      .you {
+        width: 60%;
+        background-color: #6d9773;
+        color: #fff;
+        align-self: flex-end;
+        .comment_footer {
+          flex-direction: row-reverse;
+        }
+      }
+      .outher {
+        width: 60%;
+        background-color: #bb8a52;
+        color: #fff;
+        align-self: flex-start;
+      }
+    }
   }
 }
 .body div {
@@ -22,11 +51,27 @@
   border-radius: 10px;
 }
 .comment_footer {
-  width: 102%;
+  width: 101%;
   margin-left: -5px;
   position: absolute;
-  bottom: -12px;
+  bottom: -15px;
   display: flex;
   justify-content: space-between;
   color: #fff;
+}
+.footer {
+  width: 90%;
+  height: 10%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  input {
+    width: 100%;
+    height: 80%;
+    padding: 2px 15px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin: auto;
+  }
 }

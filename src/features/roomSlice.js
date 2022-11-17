@@ -107,7 +107,7 @@ export const deleteUser = createAsyncThunk(
 //////ОБЯЗАТЕЛЬНО ПЕРЕДЕЛАТЬ ЭТОТ THUNK///////////
 export const addComment = createAsyncThunk(
   "addComment/room",
-  async ({ id, user, comment }, thunkAPI) => {
+  async ({ id, user, comment, time }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`http://localhost:3001/room/addComment/${id}`, {
@@ -116,7 +116,7 @@ export const addComment = createAsyncThunk(
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
         },
-        body: JSON.stringify({ user, comment }),
+        body: JSON.stringify({ user, comment, time }),
       });
       const addComment = await res.json();
       return { _id: id, user, comment };
@@ -195,22 +195,22 @@ const roomSlice = createSlice({
         console.log("slice rejected");
       })
       //////////ADD-COMMENT///////////
-      .addCase(addComment.fulfilled, (state, action) => {
-        state.room = state.room.map((item) => {
-          if (item._id === action.payload._id) {
-            item.users.push(action.payload);
-          }
-          return item;
-        });
-        state.loader = false;
-      })
-      .addCase(addComment.pending, (state, action) => {
-        state.loader = true;
-      })
-      .addCase(addComment.rejected, (state, action) => {
-        state.loader = false;
-        console.log("slice rejected");
-      });
+      // .addCase(addComment.fulfilled, (state, action) => {
+      //   state.room = state.room.map((item) => {
+      //     if (item._id === action.payload._id) {
+      //       item.users.push(action.payload);
+      //     }
+      //     return item;
+      //   });
+      //   state.loader = false;
+      // })
+      // .addCase(addComment.pending, (state, action) => {
+      //   state.loader = true;
+      // })
+      // .addCase(addComment.rejected, (state, action) => {
+      //   state.loader = false;
+      //   console.log("slice rejected");
+      // });
   },
 });
 

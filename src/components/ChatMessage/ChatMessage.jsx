@@ -1,15 +1,25 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addComment, fetchRoom } from "../../features/roomSlice";
+import { addComment } from "../../features/roomSlice";
 import styles from "./chatmessage.module.scss";
 import { socket } from "../ChatForm/ChatForm";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 const Chat = () => {
   const { id } = useParams();
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messageList]);
 
   const messages = useSelector((state) =>
     state.room.room.find((message) => {
@@ -33,6 +43,10 @@ const Chat = () => {
         id: id,
         user: userID,
         comment: currentMessage,
+        time:
+          new Date(Date.now()).getHours() +
+          ":" +
+          new Date(Date.now()).getMinutes(),
       })
     );
 
@@ -61,28 +75,30 @@ const Chat = () => {
   }, [socket]);
 
   return (
-    <>
-      <div className={styles.body}>
-        {messages.users.map((item, index) => {
-          return (
-            <div
-              className={userID === item.user._id ? styles.you : styles.outher}
-              key={item._id}
-            >
-              <div>
+    <div className={styles.main}>
+      <div className={styles.chatForm}>
+        <div className={styles.body}>
+          {messages.users.map((item, index) => {
+            return (
+              <div
+                className={
+                  userID === item.user._id ? styles.you : styles.outher
+                }
+                key={item._id}
+              >
                 <div>
-                  <span>{item.comment}</span>
-                </div>
-                <div className={styles.comment_footer}>
-                  <span className={styles.time}>{item.time}</span>
-                  <span className={styles.author}>{item.user.name}</span>
+                  <div>
+                    <span>{item.comment}</span>
+                  </div>
+                  <div className={styles.comment_footer}>
+                    <span className={styles.time}>{item.time}</span>
+                    <span className={styles.author}>{item.user.name}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-      <div>
+            );
+          })}
+        </div>
         {currentRoom.map((item, index) => {
           return (
             <div key={item._id}>
@@ -114,23 +130,24 @@ const Chat = () => {
                   );
                 })}
               </div>
-              <div className={styles.footer}>
-                <input
-                  type="text"
-                  value={currentMessage}
-                  placeholder="Hey..."
-                  onChange={(e) => setCurrentMessage(e.target.value)}
-                  onKeyDown={(e) => {
-                    e.key === "Enter" && sendMessage();
-                  }}
-                />
-                <button onClick={sendMessage}>&#9658;</button>
-              </div>
             </div>
           );
         })}
+        <div ref={messagesEndRef} />
       </div>
-    </>
+      <div className={styles.footer}>
+        <input
+          type="text"
+          value={currentMessage}
+          placeholder="Hey..."
+          onChange={(e) => setCurrentMessage(e.target.value)}
+          onKeyDown={(e) => {
+            e.key === "Enter" && sendMessage();
+          }}
+        />
+        {/* <button onClick={sendMessage}>&#9658;</button> */}
+      </div>
+    </div>
   );
 };
 
