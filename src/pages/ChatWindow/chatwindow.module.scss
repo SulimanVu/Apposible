@@ -1,0 +1,14 @@
+@import '../../index.scss';
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    font-size: 18px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: $b-green;
+    color: $orange;
+  }
+}

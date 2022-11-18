@@ -45,7 +45,7 @@ export const createRoom = createAsyncThunk(
 
 export const deleteRoom = createAsyncThunk(
   "delete/room",
-  async (id, thunkAPI) => {
+  async ({ id }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`http://localhost:3001/room/delete/${id}`, {
@@ -193,24 +193,24 @@ const roomSlice = createSlice({
       .addCase(createRoom.rejected, (state, action) => {
         state.loader = false;
         console.log("slice rejected");
-      })
-      //////////ADD-COMMENT///////////
-      // .addCase(addComment.fulfilled, (state, action) => {
-      //   state.room = state.room.map((item) => {
-      //     if (item._id === action.payload._id) {
-      //       item.users.push(action.payload);
-      //     }
-      //     return item;
-      //   });
-      //   state.loader = false;
-      // })
-      // .addCase(addComment.pending, (state, action) => {
-      //   state.loader = true;
-      // })
-      // .addCase(addComment.rejected, (state, action) => {
-      //   state.loader = false;
-      //   console.log("slice rejected");
-      // });
+      });
+    //////////ADD-COMMENT///////////
+    // .addCase(addComment.fulfilled, (state, action) => {
+    //   state.room = state.room.map((item) => {
+    //     if (item._id === action.payload._id) {
+    //       item.users.push(action.payload);
+    //     }
+    //     return item;
+    //   });
+    //   state.loader = false;
+    // })
+    // .addCase(addComment.pending, (state, action) => {
+    //   state.loader = true;
+    // })
+    // .addCase(addComment.rejected, (state, action) => {
+    //   state.loader = false;
+    //   console.log("slice rejected");
+    // });
   },
 });
 

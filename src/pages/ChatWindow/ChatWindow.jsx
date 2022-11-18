@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChatForm from "../../components/ChatForm/ChatForm";
-import { fetchRoom } from "../../features/roomSlice";
+import Modal from "../../components/Modal/Modal";
+import { createRoom, fetchRoom } from "../../features/roomSlice";
 import styles from "./chatwindow.module.scss";
 
 const ChatWindow = () => {
+  const [modal, setModal] = useState(false);
   const room = useSelector((state) => state.room.room);
+
   const dispath = useDispatch();
+
+  const handleAdd = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setModal(true);
+  };
 
   useEffect(() => {
     dispath(fetchRoom());
   }, [dispath]);
 
   return (
-    <div>
+    <div onClick={() => setModal(false)}>
+      {modal && <Modal />}
+      <div className={styles.header}>
+        <button onClick={handleAdd}>Добавить комнату</button>
+      </div>
       {room.map((item) => {
         return (
           <div key={item._id}>

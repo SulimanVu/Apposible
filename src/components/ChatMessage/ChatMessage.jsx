@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { addComment } from "../../features/roomSlice";
 import styles from "./chatmessage.module.scss";
 import { socket } from "../ChatForm/ChatForm";
-import ScrollToBottom from "react-scroll-to-bottom";
 
 const Chat = () => {
   const { id } = useParams();

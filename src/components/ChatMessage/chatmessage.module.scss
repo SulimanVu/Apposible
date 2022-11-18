@@ -1,8 +1,10 @@
+@import '../../index.scss';
+
 .main {
   width: 60%;
   margin: 10px auto 0;
   border-radius: 8px;
-  background-color: #0c3b2e;
+  background-color: $b-green;
   height: 80vh;
   position: relative;
   display: flex;
@@ -26,7 +28,7 @@
       flex-direction: column;
       .you {
         width: 60%;
-        background-color: #6d9773;
+        background-color: $w-green;
         color: #fff;
         align-self: flex-end;
         .comment_footer {
@@ -35,7 +37,7 @@
       }
       .outher {
         width: 60%;
-        background-color: #bb8a52;
+        background-color: $orange;
         color: #fff;
         align-self: flex-start;
       }
