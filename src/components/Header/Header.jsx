@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./header.module.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
+import logo from "../../images/logo2.png";
 
 const Header = () => {
   const id = useSelector((state) => state.application.userId);
@@ -10,21 +10,21 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <motion.div
-        transition={{ duration: 2 }}
-        initial={{ x: -109, rotate: 0, y: -40 }}
-        animate={{ x: 0, rotate: 0, y: -6}}
-        className={styles.logo}
-      >
+      <div className={styles.logo}>
         <Link to="/">
-          <img alt="#" />
+          <img src={logo} alt="logo" />
         </Link>
-      </motion.div>
+      </div>
       <div className={styles.nav_top}>
         <ul>
-        <Link to="/chat" className={styles.link}>
-            <li>Чат</li>
-          </Link>
+          {token ? (
+            <Link to="/chat" className={styles.link}>
+              <li>Chat</li>
+            </Link>
+          ) : (
+            <li className={styles.link_off}>Чат</li>
+          )}
+
           {token ? (
             <Link to={"#"} className={styles.link}>
               <li>profile</li>
@@ -32,6 +32,7 @@ const Header = () => {
           ) : (
             <li className={styles.link_off}>profile</li>
           )}
+          
           <Link to="/login" className={styles.link}>
             <li className={styles.link_mg}>sign in / sign up</li>
           </Link>

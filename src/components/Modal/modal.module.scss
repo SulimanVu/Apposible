@@ -8,6 +8,7 @@
     padding: 40px;
     width: 300px;
     border-radius: 10px;
+    z-index: 1;
     .modalName{
         font-size: 18px;
         font-weight: 400;
@@ -24,6 +25,11 @@
             outline: none;
             padding: 4px 8px;
             width: 70%;
+        }
+        button{
+            border-radius: 5px;
+            color: #fff;
+            background-color: $b-green;
         }
     }
 }

@@ -1,18 +1,33 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .main {
   width: 60%;
-  margin: 10px auto 0;
+  margin: 80px auto 0;
   border-radius: 8px;
   background-color: $b-green;
   height: 80vh;
   position: relative;
   display: flex;
   flex-direction: column;
+  .header {
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    img {
+      filter: invert(100%);
+      width: 40px;
+      height: 40px;
+    }
+    span {
+      cursor: pointer;
+    }
+  }
   .chatForm {
-    height: 90%;
+    height: 82%;
     overflow: auto;
-    padding: 0 15px;
+    padding: 10px 15px;
     box-sizing: border-box;
     &::-webkit-scrollbar {
       width: 0;
@@ -65,15 +80,16 @@
   width: 90%;
   height: 10%;
   position: absolute;
+  bottom: 0;
   display: flex;
   justify-content: center;
-  bottom: 0;
+  align-self: center;
   input {
     width: 100%;
     height: 80%;
     padding: 2px 15px;
+    border: 2px solid transparent;
     box-sizing: border-box;
     border-radius: 5px;
-    margin: auto;
   }
 }

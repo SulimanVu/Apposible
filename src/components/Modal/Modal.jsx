@@ -14,7 +14,9 @@ const Modal = () => {
   };
 
   const handleAddRoom = () => {
-    dispath(createRoom({ id: user, name: roomName }));
+    if (roomName.length > 0) {
+      dispath(createRoom({ id: user, name: roomName }));
+    }
   };
 
   return (
@@ -29,7 +31,7 @@ const Modal = () => {
             e.key === "Enter" && handleAddRoom();
           }}
         />
-        <button onClick={handleAddRoom}>Создать</button>
+        <button onClick={() => handleAddRoom()}>Создать</button>
       </div>
     </div>
   );

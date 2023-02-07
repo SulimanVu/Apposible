@@ -1,14 +1,23 @@
 @import '../../index.scss';
 
-.header {
-  display: flex;
-  justify-content: flex-end;
-  button {
-    font-size: 18px;
-    padding: 5px 15px;
-    border-radius: 5px;
-    border: none;
-    background-color: $b-green;
-    color: $orange;
+.main{
+  margin-top: 80px;
+  min-height: 100vh;
+  .header {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15%;
+    margin-bottom: 30px;
+    button {
+      font-size: 18px;
+      padding: 5px 15px;
+      border-radius: 5px;
+      background-color: $b-green;
+      color: $orange;
+      cursor: pointer;
+      &:hover{
+        opacity: 0.9;
+      }
+    }
   }
 }

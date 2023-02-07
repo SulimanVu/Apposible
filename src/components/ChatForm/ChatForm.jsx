@@ -10,12 +10,11 @@ export const socket = io.connect(`http://localhost:3001`);
 
 const ChatForm = ({ name, roomID, access }) => {
   const username = useSelector((state) => state.application.login);
-  const roomAccess = useSelector((state) => state.room.room);
-
   const dispath = useDispatch();
   const navigate = useNavigate();
 
   const joinRoom = () => {
+    localStorage.setItem("room", roomID);
     if (username !== "" && roomID !== "") {
       socket.emit("join_room", roomID);
       navigate(`/room/${roomID}`);
@@ -32,13 +31,11 @@ const ChatForm = ({ name, roomID, access }) => {
   }, [dispath]);
 
   return (
-    <div>
-      <div className={styles.window} onClick={joinRoom}>
-        <h1>
-          Комната: <span>{name}</span>
-        </h1>
-        <button onClick={handleDelete}>Удалить комнату</button>
-      </div>
+    <div className={styles.window} onClick={joinRoom}>
+      <h1>
+        Комната: <span>{name}</span>
+      </h1>
+      <button onClick={(e) => handleDelete(e)}>Удалить комнату</button>
     </div>
   );
 };

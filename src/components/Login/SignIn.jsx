@@ -1,9 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authSignIn } from "../../features/applicationSlice";
-import styles from "../Registr/signup.module.scss";
+import styles from "./signin.module.scss";
+import logo from "../../images/logo2.png";
+import arrow from "../../images/arrow-left.png";
+import { motion } from "framer-motion";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -38,18 +41,29 @@ const SignIn = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.block_signUp}>
-        <div className={styles.block_two}>
-          <h1 className={styles.title}>Sign In</h1>
-          <form onSubmit={handleSignUp} className={styles.form_signUp}>
+      <div className={styles.block_signIn}>
+        <motion.div
+          className={styles.block_two}
+          initial={{ y: -500, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
+          <img src={logo} alt="logo" />
+          <Link to="/login" className={styles.link}>
+            <img src={arrow} alt="return" />
+          </Link>
+          <h1>Войти</h1>
+          <form onSubmit={handleSignUp} className={styles.form_signIn}>
             <input
+              autoComplete="on"
               type="text"
               value={login}
               placeholder="Логин"
               onChange={(e) => handleLogin(e)}
-              className={`${styles.input4} ${styles.inp}`}
+              className={styles.input4}
             />
             <input
+              autoComplete="on"
               type={text ? "password" : "text"}
               value={password}
               placeholder="Пароль"
@@ -71,7 +85,12 @@ const SignIn = () => {
               ВХОД
             </button>
           </form>
-        </div>
+          <div className={styles.link}>
+            <Link to="/signup" className={styles.l}>
+              Нет аккаунта ?
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

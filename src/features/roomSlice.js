@@ -35,6 +35,7 @@ export const createRoom = createAsyncThunk(
         },
         body: JSON.stringify({ name, access: id }),
       });
+      console.log(id, name);
       const room = await res.json();
       return room;
     } catch (error) {

@@ -4,11 +4,13 @@ import { useParams } from "react-router-dom";
 import { addComment } from "../../features/roomSlice";
 import styles from "./chatmessage.module.scss";
 import { socket } from "../ChatForm/ChatForm";
+import UsersModal from "../UsersModal/UsersModal";
 
 const Chat = () => {
   const { id } = useParams();
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const [modal, setModal] = useState(null);
 
   const messagesEndRef = useRef(null);
 
@@ -25,15 +27,15 @@ const Chat = () => {
       return message._id === id;
     })
   );
+
   const currentRoom = useSelector((state) =>
     state.room.room.filter((item) => {
-      return item._id === id;
+      return item._id === id || item._id === localStorage.getItem("room");
     })
   );
 
   const userID = useSelector((state) => state.application.userId);
   const author = useSelector((state) => state.application.user);
-
   const dispath = useDispatch();
 
   const sendMessage = () => {
@@ -71,17 +73,21 @@ const Chat = () => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
-  }, [socket]);
+  }, []);
 
   return (
     <div className={styles.main}>
+      <div className={styles.header}>
+        <img src={require("../../images/logo2.png")} alt="logo" />
+        <span onClick={modal ? <UsersModal /> : null}>Добавить участников</span>
+      </div>
       <div className={styles.chatForm}>
         <div className={styles.body}>
           {messages.users.map((item, index) => {
             return (
               <div
                 className={
-                  userID === item.user._id ? styles.you : styles.outher
+                  userID == item.user._id ? styles.you : styles.outher
                 }
                 key={item._id}
               >

@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+.main {
+  background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.9)),
+    url(../../images/bg-img-2.jpg);
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  color: #fff;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, "Segoe UI", Roboto, Ubuntu, "SF Pro Text",
+    system-ui, "Helvetica Neue", sans-serif;
+
+  img{
+    filter: invert(100%);
+  }
+  button {
+    width: 250px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 12px;
+    cursor: pointer;
+  }
+  h1 {
+    font-size: 60px;
+    font-weight: 500;
+  }
+  .signin {
+    font-size: 16px;
+    background-color: rgb(50, 58, 75);
+    color: #fff;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    &:hover {
+      background-color: inherit;
+      border: 1px solid #fff;
+    }
+  }
+  .signup {
+    background-color: inherit;
+    color: #fff;
+    border: 1px solid #fff;
+    &:hover {
+      background-color: rgb(50, 58, 75);
+      border: 1px solid transparent;
+    }
+  }
+}
