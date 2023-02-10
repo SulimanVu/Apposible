@@ -20,9 +20,13 @@ const ChatWindow = () => {
     e.stopPropagation();
     setModal(true);
   };
+
   const handleClose = (e) => {
-    setModal(false);
+    if (e.currentTarget) {
+      setModal(false);
+    }
   };
+  
   useEffect(() => {
     dispath(fetchRoom());
   }, [dispath]);

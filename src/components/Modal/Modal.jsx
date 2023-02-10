@@ -9,7 +9,6 @@ const Modal = () => {
   const dispath = useDispatch();
 
   const handleChange = (e) => {
-    e.preventDefault();
     setRoomName(e.target.value);
   };
 
@@ -20,7 +19,7 @@ const Modal = () => {
   };
 
   return (
-    <div className={styles.modal}>
+    <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
       <div className={styles.modalName}>Введите название группы : </div>
       <div className={styles.inputBlock}>
         <input

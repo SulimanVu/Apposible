@@ -8,11 +8,12 @@ import UsersModal from "../UsersModal/UsersModal";
 
 const Chat = () => {
   const { id } = useParams();
+  const dispath = useDispatch();
+  const messagesEndRef = useRef(null);
+
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [modal, setModal] = useState(false);
-
-  const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -36,12 +37,11 @@ const Chat = () => {
 
   const userID = useSelector((state) => state.application.userId);
   const author = useSelector((state) => state.application.user);
-  const dispath = useDispatch();
 
   const sendMessage = () => {
     dispath(
       addComment({
-        id: id,
+        id,
         user: userID,
         comment: currentMessage,
         time:
@@ -69,6 +69,17 @@ const Chat = () => {
     }
   };
 
+  const handleOpen = (e) => {
+    e.stopPropagation();
+    setModal(true);
+  };
+
+  const handleClose = (e) => {
+    if (e.currentTarget) {
+      setModal(false);
+    }
+  };
+
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
@@ -76,18 +87,18 @@ const Chat = () => {
   }, []);
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} onClick={(e) => handleClose(e)}>
       <div className={styles.header}>
         <img src={require("../../images/logo2.png")} alt="logo" />
         {modal ? <UsersModal /> : null}
-        <span onClick={() => setModal(true)}>Добавить участников</span>
+        <span onClick={(e) => handleOpen(e)}>Добавить участников</span>
       </div>
       <div className={styles.chatForm}>
         <div className={styles.body}>
           {messages.users.map((item, index) => {
             return (
               <div
-                className={userID == item.user._id ? styles.you : styles.outher}
+                className={userID === item.user._id ? styles.you : styles.outher}
                 key={item._id}
               >
                 <div>
