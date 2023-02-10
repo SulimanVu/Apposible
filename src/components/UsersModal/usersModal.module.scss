@@ -1,0 +1,24 @@
+@import '../../index.scss';
+
+.modal{
+    position: absolute;
+    background-color: #fff;
+    border-radius: 15px;
+    width: 90%;
+    color: black;
+    z-index: 10;
+    padding: 5px 10px;
+    top: 30px;
+    right: 0;
+    .name{
+        margin-bottom: 5px;
+        border-radius: 10px;
+        padding: 5px 10px;
+        background-color: $b-green;
+        color: $orange;
+    }
+    .close{
+        text-align: end;
+        margin-bottom: 10px;
+    }
+}

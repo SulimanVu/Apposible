@@ -10,7 +10,7 @@ const Chat = () => {
   const { id } = useParams();
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const [modal, setModal] = useState(null);
+  const [modal, setModal] = useState(false);
 
   const messagesEndRef = useRef(null);
 
@@ -79,16 +79,15 @@ const Chat = () => {
     <div className={styles.main}>
       <div className={styles.header}>
         <img src={require("../../images/logo2.png")} alt="logo" />
-        <span onClick={modal ? <UsersModal /> : null}>Добавить участников</span>
+        {modal ? <UsersModal /> : null}
+        <span onClick={() => setModal(true)}>Добавить участников</span>
       </div>
       <div className={styles.chatForm}>
         <div className={styles.body}>
           {messages.users.map((item, index) => {
             return (
               <div
-                className={
-                  userID == item.user._id ? styles.you : styles.outher
-                }
+                className={userID == item.user._id ? styles.you : styles.outher}
                 key={item._id}
               >
                 <div>
