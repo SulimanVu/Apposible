@@ -88,15 +88,16 @@ const Chat = () => {
     }
   };
 
-  // useMemo(() => {
-  //   dispath(fetchRoom());
-  // }, [dispath, room.access]);
-
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
   }, []);
+
+  useEffect(() => {
+    dispath(fetchUsers());
+    dispath(fetchRoom());
+  }, [dispath]);
 
   return (
     <div className={styles.chatWindow}>
@@ -108,7 +109,7 @@ const Chat = () => {
         </div>
         <div className={styles.chatForm}>
           <div className={styles.body}>
-            {messages.users?.map((item, index) => {
+            {messages?.users.map((item) => {
               return (
                 <div
                   className={
@@ -129,7 +130,7 @@ const Chat = () => {
               );
             })}
           </div>
-          {currentRoom.map((item, index) => {
+          {currentRoom.map((item) => {
             return (
               <div key={item._id}>
                 <div className={styles.body}>
@@ -180,12 +181,12 @@ const Chat = () => {
       </div>
       <div className={styles.users}>
         <div className={styles.head}>Участники комнаты:</div>
-        {room.access.map((item) => {
+        {room?.access.map((item) => {
           return (
             <div className={styles.body} key={item._id}>
               <div
                 className={
-                  item._id == localStorage.getItem("id")
+                  item._id === localStorage.getItem("id")
                     ? styles.you
                     : styles.outher
                 }

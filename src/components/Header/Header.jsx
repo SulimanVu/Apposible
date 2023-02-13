@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import logo from "../../images/logo2.png";
 
 const Header = () => {
-  const id = useSelector((state) => state.application.userId);
   const token = useSelector((state) => state.application.token);
 
   return (
@@ -22,7 +21,7 @@ const Header = () => {
               <li>Chat</li>
             </Link>
           ) : (
-            <li className={styles.link_off}>Чат</li>
+            <li className={styles.link_off}>Chat</li>
           )}
 
           {token ? (
@@ -32,7 +31,7 @@ const Header = () => {
           ) : (
             <li className={styles.link_off}>profile</li>
           )}
-          
+
           <Link to="/login" className={styles.link}>
             <li className={styles.link_mg}>sign in / sign up</li>
           </Link>
