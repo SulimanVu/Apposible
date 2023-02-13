@@ -170,6 +170,12 @@ const roomSlice = createSlice({
       })
       //////////DELETE-USER-ROOM///////////
       .addCase(deleteUser.fulfilled, (state, action) => {
+        state.room = state.room.filter((item) => {
+          if (item._id === action.payload.id) {
+            item.access.filter((user) => user._id !== action.payload.id);
+          }
+          return item;
+        });
         state.loader = false;
       })
       .addCase(deleteUser.pending, (state, action) => {

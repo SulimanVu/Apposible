@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addComment, deleteUser, fetchRoom } from "../../features/roomSlice";
@@ -74,7 +74,7 @@ const Chat = () => {
   };
 
   const handleDelete = (user) => {
-    dispath(deleteUser({ id: id, user }));
+    dispath(deleteUser({ id: id, user: user }));
   };
 
   const handleOpen = (e) => {
@@ -88,9 +88,9 @@ const Chat = () => {
     }
   };
 
-  useEffect(() => {
-    dispath(fetchRoom());
-  }, [dispath]);
+  // useMemo(() => {
+  //   dispath(fetchRoom());
+  // }, [dispath, room.access]);
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
@@ -108,7 +108,7 @@ const Chat = () => {
         </div>
         <div className={styles.chatForm}>
           <div className={styles.body}>
-            {messages.users.map((item, index) => {
+            {messages.users?.map((item, index) => {
               return (
                 <div
                   className={
