@@ -35,7 +35,6 @@ export const createRoom = createAsyncThunk(
         },
         body: JSON.stringify({ name, access: id }),
       });
-      console.log(id, name);
       const room = await res.json();
       return room;
     } catch (error) {
@@ -96,10 +95,10 @@ export const deleteUser = createAsyncThunk(
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
         },
-        body: JSON.stringify({ user }),
+        body: JSON.stringify({ id, user }),
       });
       const delUser = await res.json();
-      return user;
+      return { user, id };
     } catch (error) {
       thunkAPI.rejectWithValue(error);
     }
@@ -171,9 +170,6 @@ const roomSlice = createSlice({
       })
       //////////DELETE-USER-ROOM///////////
       .addCase(deleteUser.fulfilled, (state, action) => {
-        state.room.access = state.room.access.filter(
-          (item) => item !== action.payload
-        );
         state.loader = false;
       })
       .addCase(deleteUser.pending, (state, action) => {
