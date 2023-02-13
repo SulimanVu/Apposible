@@ -1,8 +1,12 @@
 @import "../../index.scss";
 
+.chatWindow {
+  display: flex;
+  margin: 80px auto 0;
+  width: 80%;
+}
 .main {
   width: 60%;
-  margin: 80px auto 0;
   border-radius: 8px;
   background-color: $b-green;
   height: 80vh;
@@ -58,6 +62,39 @@
         align-self: flex-start;
       }
     }
+  }
+}
+.users {
+  margin: 5px 0 0 10px;
+  .body {
+    display: flex;
+    img{
+      height: 24px;
+      width: 24px;
+      cursor: pointer;
+    }
+    .you {
+      margin-bottom: 5px;
+      padding: 5px 20px;
+      border-radius: 5px;
+      background-color: $b-green;
+      color: $yellow;
+      cursor: default;
+    }
+    .outher {
+      margin-bottom: 5px;
+      padding: 5px 20px;
+      border-radius: 5px;
+      background-color: $b-green;
+      color: #fff;
+      cursor: default;
+    }
+  }
+  .head {
+    color: $w-green;
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 700;
   }
 }
 .body div {

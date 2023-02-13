@@ -1,26 +1,19 @@
-import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "../../features/applicationSlice";
-import { addUserRoom, fetchRoom } from "../../features/roomSlice";
+import { addUserRoom } from "../../features/roomSlice";
 import styles from "./usersModal.module.scss";
 
 const UsersModal = () => {
+  const dispath = useDispatch();
 
   const usersAll = useSelector((state) =>
     state.application.users.filter(
       (item) => item._id !== localStorage.getItem("id")
     )
   );
-  const dispath = useDispatch();
 
   const handleAdd = (e, user) => {
     dispath(addUserRoom({ id: localStorage.getItem("room"), user: user._id }));
   };
-
-  useEffect(() => {
-    dispath(fetchUsers());
-    dispath(fetchRoom());
-  }, [dispath]);
 
   return (
     <div className={styles.modal} onClick={(e) => e.stopPropagation()}>

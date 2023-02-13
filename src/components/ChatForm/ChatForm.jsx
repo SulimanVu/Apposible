@@ -26,10 +26,6 @@ const ChatForm = ({ name, roomID, access }) => {
     dispath(deleteRoom({ id: roomID }));
   };
 
-  useEffect(() => {
-    dispath(fetchRoom());
-  }, [dispath]);
-
   return (
     <div className={styles.window} onClick={joinRoom}>
       <h1>
