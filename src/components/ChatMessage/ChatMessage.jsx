@@ -1,11 +1,12 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addComment, deleteUser, fetchRoom } from "../../features/roomSlice";
+import { addComment, fetchRoom } from "../../features/roomSlice";
 import styles from "./chatmessage.module.scss";
 import { socket } from "../ChatForm/ChatForm";
 import UsersModal from "../UsersModal/UsersModal";
 import { fetchUsers } from "../../features/applicationSlice";
+import UsersInRoom from "../UsersInRoom/UsersInRoom";
 
 const Chat = () => {
   const { id } = useParams();
@@ -38,9 +39,7 @@ const Chat = () => {
 
   const userID = useSelector((state) => state.application.userId);
   const author = useSelector((state) => state.application.user);
-  const room = useSelector((state) =>
-    state.room.room.find((item) => item._id === id)
-  );
+
 
   const sendMessage = () => {
     dispath(
@@ -71,10 +70,6 @@ const Chat = () => {
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage("");
     }
-  };
-
-  const handleDelete = (user) => {
-    dispath(deleteUser({ id: id, user: user }));
   };
 
   const handleOpen = (e) => {
@@ -179,30 +174,7 @@ const Chat = () => {
           {/* <button onClick={sendMessage}>&#9658;</button> */}
         </div>
       </div>
-      <div className={styles.users}>
-        <div className={styles.head}>Участники комнаты:</div>
-        {room?.access.map((item) => {
-          return (
-            <div className={styles.body} key={item._id}>
-              <div
-                className={
-                  item._id === localStorage.getItem("id")
-                    ? styles.you
-                    : styles.outher
-                }
-              >
-                {item.name}
-              </div>
-              {item._id !== localStorage.getItem("id") ? (
-                <img
-                  src={require("../../images/delete.png")}
-                  onClick={() => handleDelete(item._id)}
-                />
-              ) : null}
-            </div>
-          );
-        })}
-      </div>
+      <UsersInRoom />
     </div>
   );
 };

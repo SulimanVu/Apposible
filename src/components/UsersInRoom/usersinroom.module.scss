@@ -1,0 +1,35 @@
+@import "../../index.scss";
+
+.users {
+  margin: 5px 0 0 10px;
+  .you {
+    margin-bottom: 5px;
+    padding: 5px 20px;
+    border-radius: 5px;
+    background-color: $b-green;
+    color: $yellow;
+    cursor: default;
+  }
+  .body {
+    display: flex;
+    img {
+      height: 24px;
+      width: 24px;
+      cursor: pointer;
+    }
+    .outher {
+      margin-bottom: 5px;
+      padding: 5px 20px;
+      border-radius: 5px;
+      background-color: $b-green;
+      color: #fff;
+      cursor: default;
+    }
+  }
+  .head {
+    color: $w-green;
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+}

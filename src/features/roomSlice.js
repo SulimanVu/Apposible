@@ -33,7 +33,7 @@ export const createRoom = createAsyncThunk(
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
         },
-        body: JSON.stringify({ name, access: id }),
+        body: JSON.stringify({ name, access: id, admin: name }),
       });
       const room = await res.json();
       return room;
@@ -195,10 +195,10 @@ const roomSlice = createSlice({
         state.room.push(action.payload);
         state.loader = false;
       })
-      .addCase(createRoom.pending, (state, action) => {
+      .addCase(createRoom.pending, (state) => {
         state.loader = true;
       })
-      .addCase(createRoom.rejected, (state, action) => {
+      .addCase(createRoom.rejected, (state) => {
         state.loader = false;
         console.log("slice rejected");
       });
