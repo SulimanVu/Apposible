@@ -10,18 +10,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box;
   overflow: hidden;
-  .img_block {
-    width: 50%;
-    img {
-      width: 100%;
-    }
-  }
+  
   p {
-    width: 50%;
+    width: 40%;
     font-size: 36px;
     font-weight: 500;
     margin-left: 40px;
+  }
+  .img_block{
+    width: 40%;
+    img{
+      width: 100%;
+      object-fit: cover;
+    }
   }
 }

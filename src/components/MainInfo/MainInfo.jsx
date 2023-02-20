@@ -28,8 +28,8 @@ const MainInfo = () => {
       </div>
       <div className={styles.container}>
         <motion.p
-          initial={{ opacity: 0, y: 400 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -400 }}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 2 }}
         >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, officia
@@ -39,8 +39,8 @@ const MainInfo = () => {
         </motion.p>
         <div className={styles.img_block}>
           <motion.img
-            initial={{ opacity: 0, y: 400 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 400 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.5 }}
             src={require("../../images/info.png")}
             alt="#"

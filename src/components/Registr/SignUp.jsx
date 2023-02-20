@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { authSignUp } from "../../features/applicationSlice";
 import styles from "./signup.module.scss";
 import logo from "../../images/logo2.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import arrow from "../../images/arrow-left.png";
 import { motion } from "framer-motion";
 
@@ -15,6 +15,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [text, setText] = useState(true);
   const [iconPassword, setIconPassword] = useState(true);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -41,6 +42,7 @@ const SignUp = () => {
     setName("");
     setMail("");
     setLogin("");
+    navigate("/signin");
   };
 
   const handleClick = () => {

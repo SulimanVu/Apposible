@@ -15,6 +15,7 @@ const UsersInRoom = () => {
   const handleDelete = (user) => {
     dispath(deleteUser({ id: id, user: user }));
   };
+  
   return (
     <div className={styles.users}>
       <div className={styles.head}>Участники комнаты:</div>

@@ -40,7 +40,6 @@ const Chat = () => {
   const userID = useSelector((state) => state.application.userId);
   const author = useSelector((state) => state.application.user);
 
-
   const sendMessage = () => {
     dispath(
       addComment({
@@ -95,86 +94,88 @@ const Chat = () => {
   }, [dispath]);
 
   return (
-    <div className={styles.chatWindow}>
-      <div className={styles.main} onClick={(e) => handleClose(e)}>
-        <div className={styles.header}>
-          <img src={require("../../images/logo2.png")} alt="logo" />
-          {modal ? <UsersModal /> : null}
-          <span onClick={(e) => handleOpen(e)}>Добавить участников</span>
-        </div>
-        <div className={styles.chatForm}>
-          <div className={styles.body}>
-            {messages?.users.map((item) => {
-              return (
-                <div
-                  className={
-                    userID === item.user._id ? styles.you : styles.outher
-                  }
-                  key={item._id}
-                >
-                  <div>
+    <div className={styles.bg}>
+      <div className={styles.chatWindow}>
+        <div className={styles.main} onClick={(e) => handleClose(e)}>
+          <div className={styles.header}>
+            <img src={require("../../images/logo2.png")} alt="logo" />
+            {modal ? <UsersModal /> : null}
+            <span onClick={(e) => handleOpen(e)}>Добавить участников</span>
+          </div>
+          <div className={styles.chatForm}>
+            <div className={styles.body}>
+              {messages?.users.map((item) => {
+                return (
+                  <div
+                    className={
+                      userID === item.user._id ? styles.you : styles.outher
+                    }
+                    key={item._id}
+                  >
                     <div>
-                      <span>{item.comment}</span>
+                      <div>
+                        <span>{item.comment}</span>
+                      </div>
+                      <div className={styles.comment_footer}>
+                        <span className={styles.time}>{item.time}</span>
+                        <span className={styles.author}>{item.user.name}</span>
+                      </div>
                     </div>
-                    <div className={styles.comment_footer}>
-                      <span className={styles.time}>{item.time}</span>
-                      <span className={styles.author}>{item.user.name}</span>
-                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {currentRoom.map((item) => {
+              return (
+                <div key={item._id}>
+                  <div className={styles.body}>
+                    {messageList.map((messageContent, index) => {
+                      return (
+                        <div
+                          className={
+                            userID === messageContent.author
+                              ? styles.you
+                              : styles.outher
+                          }
+                          key={index}
+                        >
+                          <div>
+                            <div>
+                              <span>{messageContent.message}</span>
+                            </div>
+                            <div className={styles.comment_footer}>
+                              <span className={styles.time}>
+                                {messageContent.time}
+                              </span>
+                              <span className={styles.author}>
+                                {messageContent.authorName}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               );
             })}
+            <div ref={messagesEndRef} />
           </div>
-          {currentRoom.map((item) => {
-            return (
-              <div key={item._id}>
-                <div className={styles.body}>
-                  {messageList.map((messageContent, index) => {
-                    return (
-                      <div
-                        className={
-                          userID === messageContent.author
-                            ? styles.you
-                            : styles.outher
-                        }
-                        key={index}
-                      >
-                        <div>
-                          <div>
-                            <span>{messageContent.message}</span>
-                          </div>
-                          <div className={styles.comment_footer}>
-                            <span className={styles.time}>
-                              {messageContent.time}
-                            </span>
-                            <span className={styles.author}>
-                              {messageContent.authorName}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
-          <div ref={messagesEndRef} />
+          <div className={styles.footer}>
+            <input
+              type="text"
+              value={currentMessage}
+              placeholder="Hey..."
+              onChange={(e) => setCurrentMessage(e.target.value)}
+              onKeyDown={(e) => {
+                e.key === "Enter" && sendMessage();
+              }}
+            />
+            {/* <button onClick={sendMessage}>&#9658;</button> */}
+          </div>
         </div>
-        <div className={styles.footer}>
-          <input
-            type="text"
-            value={currentMessage}
-            placeholder="Hey..."
-            onChange={(e) => setCurrentMessage(e.target.value)}
-            onKeyDown={(e) => {
-              e.key === "Enter" && sendMessage();
-            }}
-          />
-          {/* <button onClick={sendMessage}>&#9658;</button> */}
-        </div>
+        <UsersInRoom />
       </div>
-      <UsersInRoom />
     </div>
   );
 };
