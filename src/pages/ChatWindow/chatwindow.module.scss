@@ -1,8 +1,15 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
-.main{
-  margin-top: 80px;
+.main {
+  padding-top: 80px;
   min-height: 100vh;
+  background: linear-gradient(
+    to right, 
+    rgb(0 0 0 / 0.7), 
+    rgb(0 0 0 / 0)),
+    url("../../images/room-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   .header {
     display: flex;
     justify-content: flex-end;
@@ -15,7 +22,7 @@
       background-color: $b-green;
       color: $orange;
       cursor: pointer;
-      &:hover{
+      &:hover {
         opacity: 0.9;
       }
     }

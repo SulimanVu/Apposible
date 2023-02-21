@@ -1,35 +1,36 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
-.modal{
-    position: fixed;
-    top: 10%;
-    left: 35%;
-    background-color: $w-green;
-    padding: 40px;
-    width: 300px;
-    border-radius: 10px;
-    z-index: 1;
-    .modalName{
-        font-size: 18px;
-        font-weight: 400;
-        margin-bottom: 10px;
-        color: $yellow;
+.modal {
+  position: fixed;
+  top: 10%;
+  left: 35%;
+  background-color: $w-green;
+  padding: 40px;
+  width: 300px;
+  border-radius: 10px;
+  z-index: 1;
+  .modalName {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: $yellow;
+  }
+  .inputBlock {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    input {
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      padding: 4px 8px;
+      width: 70%;
     }
-    .inputBlock{
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        input{
-            border-radius: 5px;
-            border: none;
-            outline: none;
-            padding: 4px 8px;
-            width: 70%;
-        }
-        button{
-            border-radius: 5px;
-            color: #fff;
-            background-color: $b-green;
-        }
+    button {
+      border-radius: 5px;
+      color: #fff;
+      background-color: $b-green;
+      cursor: pointer;
     }
+  }
 }

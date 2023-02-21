@@ -3,8 +3,7 @@ import io from "socket.io-client";
 import styles from "./chatform.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { deleteRoom, fetchRoom } from "../../features/roomSlice";
+import { deleteRoom } from "../../features/roomSlice";
 
 export const socket = io.connect(`http://localhost:3001`);
 
@@ -14,7 +13,6 @@ const ChatForm = ({ name, roomID, access }) => {
   const navigate = useNavigate();
 
   const joinRoom = () => {
-    localStorage.setItem("room", roomID);
     if (username !== "" && roomID !== "") {
       socket.emit("join_room", roomID);
       navigate(`/room/${roomID}`);

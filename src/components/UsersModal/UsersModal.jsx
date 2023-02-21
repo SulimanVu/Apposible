@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { addUserRoom } from "../../features/roomSlice";
 import styles from "./usersModal.module.scss";
 
 const UsersModal = () => {
   const dispath = useDispatch();
+  const { id } = useParams();
 
   const usersAll = useSelector((state) =>
     state.application.users.filter(
@@ -12,7 +14,7 @@ const UsersModal = () => {
   );
 
   const handleAdd = (e, user) => {
-    dispath(addUserRoom({ id: localStorage.getItem("room"), user: user._id }));
+    dispath(addUserRoom({ id: id, user: user._id }));
   };
 
   return (

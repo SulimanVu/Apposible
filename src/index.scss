@@ -1,4 +1,4 @@
-$b-green: #0c3b2e;
+$b-green: rgb(12, 59, 46);
 $w-green: #6d9773;
 $b-blue: #001427;
 $orange: #bb8a52;
@@ -6,6 +6,8 @@ $yellow: #ffba00;
 
 body {
   margin: 0;
+  padding: 0;
+  width: 100%;
 }
 body::-webkit-scrollbar {
   width: 0px;

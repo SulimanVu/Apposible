@@ -2,11 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   users: [],
-  user: localStorage.getItem("name"),
   token: localStorage.getItem("token"),
   userId: localStorage.getItem("id"),
-  login: localStorage.getItem("login"),
-  avatar: localStorage.getItem("avatar"),
 };
 
 export const fetchUsers = createAsyncThunk(
@@ -43,10 +40,6 @@ export const authSignIn = createAsyncThunk(
       console.log(data);
       localStorage.setItem("token", data.token);
       localStorage.setItem("id", data.user._id);
-      localStorage.setItem("login", data.user.login);
-      // localStorage.setItem("avatar", data.avatar);
-      localStorage.setItem("name", data.user.name);
-
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -90,9 +83,9 @@ const applicationSlice = createSlice({
       .addCase(authSignUp.fulfilled, (state, action) => {
         state.token = action.payload;
       })
-      .addCase(fetchUsers.fulfilled, (state, action)=>{
-        state.users = action.payload
-      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.users = action.payload;
+      });
   },
 });
 

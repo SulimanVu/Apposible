@@ -1,11 +1,16 @@
 import React from "react";
 import styles from "./header.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from "../../images/logo2.png";
 
 const Header = () => {
+  const params = useLocation();
   const token = useSelector((state) => state.application.token);
+  const id = localStorage.getItem("id");
+
+  const chat = params.pathname.includes("chat");
+  const profile = params.pathname.includes("profile");
 
   return (
     <header className={styles.header}>
@@ -17,7 +22,10 @@ const Header = () => {
       <div className={styles.nav_top}>
         <ul>
           {token ? (
-            <Link to="/chat" className={styles.link}>
+            <Link
+              to="/chat"
+              className={chat ? `${styles.link} ${styles.active}` : styles.link}
+            >
               <li>Chat</li>
             </Link>
           ) : (
@@ -25,7 +33,12 @@ const Header = () => {
           )}
 
           {token ? (
-            <Link to={"#"} className={styles.link}>
+            <Link
+              to={`profile/${id}`}
+              className={
+                profile ? `${styles.link} ${styles.active}` : styles.link
+              }
+            >
               <li>profile</li>
             </Link>
           ) : (

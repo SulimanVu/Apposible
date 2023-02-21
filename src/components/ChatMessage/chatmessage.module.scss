@@ -1,8 +1,16 @@
 @import "../../index.scss";
 
+.bg {
+  height: 100vh;
+  background: linear-gradient(to right, rgb(0 0 0 / 0.8), rgb(0 0 0 / 0)),
+    url("../../images/chat-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 100px 0 0 50px;
+}
 .chatWindow {
   display: flex;
-  margin: 80px auto 0;
   width: 80%;
 }
 .main {
@@ -64,39 +72,7 @@
     }
   }
 }
-.users {
-  margin: 5px 0 0 10px;
-  .body {
-    display: flex;
-    img{
-      height: 24px;
-      width: 24px;
-      cursor: pointer;
-    }
-    .you {
-      margin-bottom: 5px;
-      padding: 5px 20px;
-      border-radius: 5px;
-      background-color: $b-green;
-      color: $yellow;
-      cursor: default;
-    }
-    .outher {
-      margin-bottom: 5px;
-      padding: 5px 20px;
-      border-radius: 5px;
-      background-color: $b-green;
-      color: #fff;
-      cursor: default;
-    }
-  }
-  .head {
-    color: $w-green;
-    margin-bottom: 10px;
-    font-size: 24px;
-    font-weight: 700;
-  }
-}
+
 .body div {
   position: relative;
   height: fit-content;
@@ -129,5 +105,6 @@
     border: 2px solid transparent;
     box-sizing: border-box;
     border-radius: 5px;
+    outline: none;
   }
 }
