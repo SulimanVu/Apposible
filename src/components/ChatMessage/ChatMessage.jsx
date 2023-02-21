@@ -33,7 +33,7 @@ const Chat = () => {
 
   const currentRoom = useSelector((state) =>
     state.room.room.filter((item) => {
-      return item._id === id || item._id === localStorage.getItem("room");
+      return item._id === id;
     })
   );
 
