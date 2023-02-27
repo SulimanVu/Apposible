@@ -10,7 +10,7 @@ export const fetchUsers = createAsyncThunk(
   "fetch/users",
   async (_, thunkAPI) => {
     try {
-      const res = await fetch("http://localhost:3001/api/auth/users", {
+      const res = await fetch(`http://localhost:3001/api/auth/users`, {
         method: "GET",
       });
 
@@ -26,7 +26,7 @@ export const authSignIn = createAsyncThunk(
   "auth/signin",
   async ({ login, password }, thunkAPI) => {
     try {
-      const res = await fetch("http://localhost:3001/api/auth/login", {
+      const res = await fetch(`http://localhost:3001/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +37,6 @@ export const authSignIn = createAsyncThunk(
       if (data.error) {
         return thunkAPI.rejectWithValue(data.error);
       }
-      console.log(data);
       localStorage.setItem("token", data.token);
       localStorage.setItem("id", data.user._id);
       return data;
@@ -51,7 +50,7 @@ export const authSignUp = createAsyncThunk(
   "auth/signUp",
   async ({ login, password, name, email, avatar }, thunkAPI) => {
     try {
-      const res = await fetch("http://localhost:3001/api/auth/registr", {
+      const res = await fetch(`http://localhost:3001/api/auth/registr`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

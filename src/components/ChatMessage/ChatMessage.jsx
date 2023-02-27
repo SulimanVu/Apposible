@@ -7,6 +7,7 @@ import { socket } from "../ChatForm/ChatForm";
 import UsersModal from "../UsersModal/UsersModal";
 import { fetchUsers } from "../../features/applicationSlice";
 import UsersInRoom from "../UsersInRoom/UsersInRoom";
+import Disk from "../Disk/Disk";
 
 const Chat = () => {
   const { id } = useParams();
@@ -165,6 +166,7 @@ const Chat = () => {
           </div>
         </div>
         <UsersInRoom />
+        <Disk />
       </div>
     </div>
   );
