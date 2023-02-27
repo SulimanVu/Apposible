@@ -31,14 +31,21 @@ const Chat = () => {
     })
   );
 
-  const currentRoom = useSelector((state) =>
-    state.room.room.filter((item) => {
-      return item._id === id;
-    })
-  );
+  // const currentRoom = useSelector((state) =>
+  //   state.room.room.filter((item) => {
+  //     return item._id === id;
+  //   })
+  // );
 
   const userID = useSelector((state) => state.application.userId);
-  const author = useSelector((state) => state.application.user);
+  const author = useSelector((state) =>
+    state.application.users.find((user) => user._id === userID)
+  );
+
+  const minutes =
+    new Date(Date.now()).getMinutes().toString() < 10
+      ? "0" + new Date(Date.now()).getMinutes()
+      : new Date(Date.now()).getMinutes();
 
   const sendMessage = () => {
     dispath(
@@ -46,10 +53,7 @@ const Chat = () => {
         id,
         user: userID,
         comment: currentMessage,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
+        time: minutes,
       })
     );
 
@@ -57,12 +61,9 @@ const Chat = () => {
       const messageData = {
         room: id,
         author: userID,
-        authorName: author,
+        authorName: author.name,
         message: currentMessage,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
+        time: minutes,
       };
 
       socket.emit("send_message", messageData);
@@ -113,7 +114,7 @@ const Chat = () => {
                     key={item._id}
                   >
                     <div>
-                      <div>
+                      <div className={styles.message}>
                         <span>{item.comment}</span>
                       </div>
                       <div className={styles.comment_footer}>
@@ -125,40 +126,40 @@ const Chat = () => {
                 );
               })}
             </div>
-            {currentRoom.map((item) => {
+            {/* {currentRoom.map((item) => {
               return (
-                <div key={item._id}>
-                  <div className={styles.body}>
-                    {messageList.map((messageContent, index) => {
-                      return (
-                        <div
-                          className={
-                            userID === messageContent.author
-                              ? styles.you
-                              : styles.outher
-                          }
-                          key={index}
-                        >
-                          <div>
-                            <div>
-                              <span>{messageContent.message}</span>
-                            </div>
-                            <div className={styles.comment_footer}>
-                              <span className={styles.time}>
-                                {messageContent.time}
-                              </span>
-                              <span className={styles.author}>
-                                {messageContent.authorName}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
+                <div key={item._id}> */}
+            <div className={styles.body}>
+              {messageList.map((messageContent, index) => {
+                return (
+                  <div
+                    className={
+                      userID === messageContent.author
+                        ? styles.you
+                        : styles.outher
+                    }
+                    key={index}
+                  >
+                    <div>
+                      <div className={styles.message}>
+                        <span>{messageContent.message}</span>
+                      </div>
+                      <div className={styles.comment_footer}>
+                        <span className={styles.time}>
+                          {messageContent.time}
+                        </span>
+                        <span className={styles.author}>
+                          {messageContent.authorName}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                );
+              })}
+            </div>
+            {/* </div>
               );
-            })}
+            })} */}
             <div ref={messagesEndRef} />
           </div>
           <div className={styles.footer}>
