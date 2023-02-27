@@ -31,12 +31,6 @@ const Chat = () => {
     })
   );
 
-  // const currentRoom = useSelector((state) =>
-  //   state.room.room.filter((item) => {
-  //     return item._id === id;
-  //   })
-  // );
-
   const userID = useSelector((state) => state.application.userId);
   const author = useSelector((state) =>
     state.application.users.find((user) => user._id === userID)
@@ -126,9 +120,6 @@ const Chat = () => {
                 );
               })}
             </div>
-            {/* {currentRoom.map((item) => {
-              return (
-                <div key={item._id}> */}
             <div className={styles.body}>
               {messageList.map((messageContent, index) => {
                 return (
@@ -157,9 +148,7 @@ const Chat = () => {
                 );
               })}
             </div>
-            {/* </div>
-              );
-            })} */}
+
             <div ref={messagesEndRef} />
           </div>
           <div className={styles.footer}>
