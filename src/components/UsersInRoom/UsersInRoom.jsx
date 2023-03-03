@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { deleteUser } from "../../features/roomSlice";
@@ -15,7 +14,7 @@ const UsersInRoom = () => {
   const handleDelete = (user) => {
     dispath(deleteUser({ id: id, user: user }));
   };
-  
+
   return (
     <div className={styles.users}>
       <div className={styles.head}>Участники комнаты:</div>

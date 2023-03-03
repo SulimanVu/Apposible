@@ -1,0 +1,17 @@
+.disk {
+  margin: 20px;
+  .buttons {
+    display: flex;
+    button {
+      height: min-content;
+      font-size: 16px;
+      padding: 4px 16px;
+      border-radius: 8px;
+      border: none;
+      white-space: nowrap;
+    }
+    .create {
+      margin-left: 20px;
+    }
+  }
+}

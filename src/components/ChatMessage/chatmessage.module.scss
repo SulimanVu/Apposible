@@ -8,13 +8,22 @@
   background-position: center;
   background-size: cover;
   padding: 100px 0 0 50px;
+  @media screen and (max-width: 500px) {
+    padding-left: 0;
+  }
 }
 .chatWindow {
   display: flex;
-  width: 80%;
+  width: 100%;
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
 }
 .main {
-  width: 60%;
+  width: 40%;
   border-radius: 8px;
   background-color: $b-green;
   height: 80vh;
@@ -54,35 +63,42 @@
     .body {
       display: flex;
       flex-direction: column;
+      padding: 0 10px;
+      box-sizing: border-box;
       .you {
-        width: 60%;
+        min-width: 20%;
+        max-width: 48%;
         background-color: $w-green;
-        color: #fff;
         align-self: flex-end;
         .comment_footer {
           flex-direction: row-reverse;
         }
       }
       .outher {
-        width: 60%;
+        min-width: 20%;
+        max-width: 40%;
         background-color: $orange;
-        color: #fff;
         align-self: flex-start;
       }
     }
   }
 }
 
+.message {
+  word-break: break-all;
+}
+.message span {
+  padding-right: 15px;
+}
 .body div {
+  color: #fff;
   position: relative;
-  height: fit-content;
-  padding: 5px 5px 0;
-  box-sizing: border-box;
+  padding: 5px 0 0 5px;
   margin-bottom: 20px;
   border-radius: 10px;
 }
 .comment_footer {
-  width: 101%;
+  width: 100%;
   margin-left: -5px;
   position: absolute;
   bottom: -15px;
