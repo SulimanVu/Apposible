@@ -1,6 +1,7 @@
 @import "../../index.scss";
 
 .bg {
+  height: 100vh;
   background: linear-gradient(to right, rgb(0 0 0 / 0.8), rgb(0 0 0 / 0)),
     url("../../images/chat-bg.jpg");
   background-repeat: no-repeat;
@@ -13,7 +14,7 @@
 }
 .chatWindow {
   display: flex;
-  width: 80%;
+  width: 100%;
   @media screen and (max-width: 500px) {
     flex-direction: column;
     width: 100%;
@@ -22,7 +23,7 @@
   }
 }
 .main {
-  width: 60%;
+  width: 40%;
   border-radius: 8px;
   background-color: $b-green;
   height: 80vh;

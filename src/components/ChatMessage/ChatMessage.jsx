@@ -165,7 +165,7 @@ const Chat = () => {
             {/* <button onClick={sendMessage}>&#9658;</button> */}
           </div>
         </div>
-        <UsersInRoom />
+        {/* <UsersInRoom /> */}
         <Disk />
       </div>
     </div>
