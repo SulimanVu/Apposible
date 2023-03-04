@@ -61,6 +61,7 @@ const fileSlice = createSlice({
         state.currentDir = action.payload.file.find(
           (item) => item.room === action.payload.room
         );
+        state.files = action.payload;
       })
       .addCase(addDir.fulfilled, (state, action) => {});
   },

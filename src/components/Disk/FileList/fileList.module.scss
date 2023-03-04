@@ -2,6 +2,9 @@
 
 .fileList {
   margin: 20px 0;
+  padding: 10px;
+  background-color: $w-green;
+  border-radius: 8px;
   .header {
     color: $yellow;
     display: grid;
@@ -15,7 +18,7 @@
       grid-column-start: 2;
     }
     .date {
-      grid-column-start: 4;
+      grid-column-start: 3;
       justify-self: center;
     }
     .size {

@@ -1,11 +1,32 @@
-import React from 'react';
+import React from "react";
+import styles from "./file.module.scss";
+import { BsFiletypeHtml } from "react-icons/bs";
+import { BsFiletypeScss } from "react-icons/bs";
+import { SiJavascript } from "react-icons/si";
+import { AiTwotoneFolderOpen } from "react-icons/ai";
+import { AiFillFileImage } from "react-icons/ai";
+import { AiFillFileWord } from "react-icons/ai";
+import { FaFilePowerpoint } from "react-icons/fa";
 
-const File = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const File = ({ file }) => {
+  const image = ["img", "jpeg", "jpg", "svg", "png"];
+
+  return (
+    <div className={styles.file}>
+      {file.type === "dir" && <AiTwotoneFolderOpen size={22} />}
+      {file.type === "html" && <BsFiletypeHtml size={22} />}
+      {file.type === "css" && <BsFiletypeScss size={22} />}
+      {file.type === "js" && <SiJavascript size={22} />}
+      {file.type === "pptx" && <FaFilePowerpoint size={22} />}
+      {file.type === "docx" && <AiFillFileWord size={22} />}
+
+      {image.includes(file.type) && <AiFillFileImage size={22} />}
+
+      <div className={styles.name}>{file.name}</div>
+      <div className={styles.date}>{file.date.slice(0, 10)}</div>
+      <div className={styles.size}>{file.size}</div>
+    </div>
+  );
 };
 
 export default File;
