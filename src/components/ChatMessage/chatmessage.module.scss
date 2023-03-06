@@ -63,7 +63,6 @@
     .body {
       display: flex;
       flex-direction: column;
-      padding: 0 10px;
       box-sizing: border-box;
       .you {
         min-width: 20%;
@@ -87,19 +86,15 @@
 .message {
   word-break: break-all;
 }
-.message span {
-  padding-right: 15px;
-}
 .body div {
   color: #fff;
   position: relative;
-  padding: 5px 0 0 5px;
+  padding: 5px 5px 0 5px;
   margin-bottom: 20px;
   border-radius: 10px;
 }
 .comment_footer {
   width: 100%;
-  margin-left: -5px;
   position: absolute;
   bottom: -15px;
   display: flex;
