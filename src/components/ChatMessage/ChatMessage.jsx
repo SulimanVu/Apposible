@@ -6,7 +6,7 @@ import styles from "./chatmessage.module.scss";
 import { socket } from "../ChatForm/ChatForm";
 import UsersModal from "../UsersModal/UsersModal";
 import { fetchUsers } from "../../features/applicationSlice";
-import UsersInRoom from "../UsersInRoom/UsersInRoom";
+// import UsersInRoom from "../UsersInRoom/UsersInRoom";
 import Disk from "../Disk/Disk";
 
 const Chat = () => {
@@ -38,9 +38,11 @@ const Chat = () => {
   );
 
   const minutes =
-    new Date(Date.now()).getMinutes().toString() < 10
+    new Date(Date.now()).getMinutes() < 10
       ? "0" + new Date(Date.now()).getMinutes()
       : new Date(Date.now()).getMinutes();
+
+  const hours = new Date(Date.now()).getHours();
 
   const sendMessage = () => {
     dispath(
@@ -48,7 +50,7 @@ const Chat = () => {
         id,
         user: userID,
         comment: currentMessage,
-        time: minutes,
+        time: hours + ":" + minutes,
       })
     );
 
@@ -58,7 +60,7 @@ const Chat = () => {
         author: userID,
         authorName: author.name,
         message: currentMessage,
-        time: minutes,
+        time: hours + ":" + minutes,
       };
 
       socket.emit("send_message", messageData);
