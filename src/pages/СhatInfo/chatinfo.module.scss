@@ -3,12 +3,15 @@
 .main {
   margin-top: 60px;
   .window {
+    position: relative;
     width: 70%;
+    padding: 20px;
     margin: auto;
     border-radius: 8px;
     background-color: $b-green;
     color: $yellow;
     .header {
+      margin-bottom: 20px;
       display: flex;
       .info {
         display: flex;
@@ -20,6 +23,23 @@
         width: 100px;
         height: 100px;
         margin-right: 40px;
+        overflow: hidden;
+        img{
+          width: 100%;
+        }
+      }
+    }
+    .addUser {
+      display: flex;
+      align-items: center;
+      padding: 5px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: .3s;
+      cursor: pointer;
+      &:hover{
+        background-color: $w-green;
+        color: #fff;
       }
     }
   }

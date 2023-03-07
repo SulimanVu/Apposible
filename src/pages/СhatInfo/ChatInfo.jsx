@@ -34,17 +34,23 @@ const ChatInfo = () => {
   return (
     <div className={styles.main} onClick={(e) => handleClose(e)}>
       <div className={styles.window} onClick={(e) => handleClose(e)}>
+        {modal ? <UsersModal /> : null}
         <div className={styles.header}>
           <div className={styles.image}>
-            <img src="" alt="#" />
+            {room?.image ? (
+              <img src={room.image} />
+            ) : (
+              <img src={require("../../images/room_logo.png")} alt="#" />
+            )}
           </div>
           <div className={styles.info}>
             <h2>{room?.name}</h2>
             <span>Группа: {room?.access.length}</span>
           </div>
         </div>
-        {modal ? <UsersModal /> : null}
-        <button onClick={handleOpen}>добавить участников</button>
+        <button className={styles.addUser} onClick={handleOpen}>
+          Добавить участников
+        </button>
         <UsersInRoom />
       </div>
     </div>

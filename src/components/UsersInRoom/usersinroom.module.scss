@@ -1,7 +1,7 @@
 @import "../../index.scss";
 
 .users {
-  margin: 5px 0 0 10px;
+  margin: 20px 0 0 10px;
   .you {
     margin-bottom: 5px;
     padding: 5px 20px;
@@ -16,6 +16,7 @@
       height: 24px;
       width: 24px;
       cursor: pointer;
+      filter: invert(100%);
     }
     .outher {
       margin-bottom: 5px;

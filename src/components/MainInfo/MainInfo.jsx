@@ -13,21 +13,21 @@ const MainInfo = () => {
           <motion.img
             initial={{ opacity: 0, transform: "scale(0)" }}
             whileInView={{ opacity: 1, transform: "scale(1)" }}
-            transition={{ duration: 2.5 }}
+            transition={{ duration: 1.5 }}
             src={word}
             alt="#"
           />
           <motion.img
             initial={{ opacity: 0, transform: "scale(0)" }}
             whileInView={{ opacity: 1, transform: "scale(1)" }}
-            transition={{ duration: 2.5, delay: 0.5 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
             src={excel}
             alt="#"
           />
           <motion.img
             initial={{ opacity: 0, transform: "scale(0)" }}
             whileInView={{ opacity: 1, transform: "scale(1)" }}
-            transition={{ duration: 2.5, delay: 1 }}
+            transition={{ duration: 1.5, delay: 1 }}
             src={powerpoint}
             alt="#"
           />
