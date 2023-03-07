@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { addComment, fetchRoom } from "../../features/roomSlice";
 import styles from "./chatmessage.module.scss";
 import { socket } from "../ChatForm/ChatForm";
-import UsersModal from "../UsersModal/UsersModal";
+// import UsersModal from "../UsersModal/UsersModal";
 import { fetchUsers } from "../../features/applicationSlice";
 // import UsersInRoom from "../UsersInRoom/UsersInRoom";
 import Disk from "../Disk/Disk";
@@ -12,11 +12,12 @@ import Disk from "../Disk/Disk";
 const Chat = () => {
   const { id } = useParams();
   const dispath = useDispatch();
+  const navigate = useNavigate();
   const messagesEndRef = useRef(null);
 
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -69,15 +70,19 @@ const Chat = () => {
     }
   };
 
-  const handleOpen = (e) => {
-    e.stopPropagation();
-    setModal(true);
-  };
+  // const handleOpen = (e) => {
+  //   e.stopPropagation();
+  //   setModal(true);
+  // };
 
-  const handleClose = (e) => {
-    if (e.currentTarget) {
-      setModal(false);
-    }
+  // const handleClose = (e) => {
+  //   if (e.currentTarget) {
+  //     setModal(false);
+  //   }
+  // };
+
+  const handleRouteRoom = () => {
+    navigate(`/room/info/${id}`);
   };
 
   useEffect(() => {
@@ -94,11 +99,16 @@ const Chat = () => {
   return (
     <div className={styles.bg}>
       <div className={styles.chatWindow}>
-        <div className={styles.main} onClick={(e) => handleClose(e)}>
+        {/* <div className={styles.main} onClick={(e) => handleClose(e)}> */}
+        <div className={styles.main}>
           <div className={styles.header}>
-            <img src={require("../../images/logo2.png")} alt="logo" />
-            {modal ? <UsersModal /> : null}
-            <span onClick={(e) => handleOpen(e)}>Добавить участников</span>
+            <img
+              src={require("../../images/logo2.png")}
+              alt="logo"
+              onClick={handleRouteRoom}
+            />
+            {/* {modal ? <UsersModal /> : null}
+            <span onClick={(e) => handleOpen(e)}>Добавить участников</span> */}
           </div>
           <div className={styles.chatForm}>
             <div className={styles.body}>

@@ -9,6 +9,7 @@ import MainPage from "./pages/MainPage/MainPage";
 import SignIn from "./components/Login/SignIn";
 import SignUp from "./components/Registr/SignUp";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import ChatInfo from "./pages/СhatInfo/ChatInfo";
 
 function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
         <Route path="/chat" element={<ChatWindow />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="/room/:id" element={<ChatMessage />} />
+        <Route path="/room/info/:id" element={<ChatInfo />} />
         <Route path="/login" element={<FormRegistration />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />

@@ -1,0 +1,26 @@
+@import "../../index.scss";
+
+.main {
+  margin-top: 60px;
+  .window {
+    width: 70%;
+    margin: auto;
+    border-radius: 8px;
+    background-color: $b-green;
+    color: $yellow;
+    .header {
+      display: flex;
+      .info {
+        display: flex;
+        flex-direction: column;
+      }
+      .image {
+        border-radius: 100%;
+        background-color: $w-green;
+        width: 100px;
+        height: 100px;
+        margin-right: 40px;
+      }
+    }
+  }
+}
