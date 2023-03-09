@@ -4,9 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { addComment, fetchRoom } from "../../features/roomSlice";
 import styles from "./chatmessage.module.scss";
 import { socket } from "../ChatForm/ChatForm";
-// import UsersModal from "../UsersModal/UsersModal";
 import { fetchUsers } from "../../features/applicationSlice";
-// import UsersInRoom from "../UsersInRoom/UsersInRoom";
 import Disk from "../Disk/Disk";
 
 const Chat = () => {
@@ -17,7 +15,6 @@ const Chat = () => {
 
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  // const [modal, setModal] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -70,17 +67,6 @@ const Chat = () => {
     }
   };
 
-  // const handleOpen = (e) => {
-  //   e.stopPropagation();
-  //   setModal(true);
-  // };
-
-  // const handleClose = (e) => {
-  //   if (e.currentTarget) {
-  //     setModal(false);
-  //   }
-  // };
-
   const handleRouteRoom = () => {
     navigate(`/room/info/${id}`);
   };
@@ -99,7 +85,6 @@ const Chat = () => {
   return (
     <div className={styles.bg}>
       <div className={styles.chatWindow}>
-        {/* <div className={styles.main} onClick={(e) => handleClose(e)}> */}
         <div className={styles.main}>
           <div className={styles.header}>
             <img
@@ -107,8 +92,6 @@ const Chat = () => {
               alt="logo"
               onClick={handleRouteRoom}
             />
-            {/* {modal ? <UsersModal /> : null}
-            <span onClick={(e) => handleOpen(e)}>Добавить участников</span> */}
           </div>
           <div className={styles.chatForm}>
             <div className={styles.body}>
@@ -174,10 +157,8 @@ const Chat = () => {
                 e.key === "Enter" && sendMessage();
               }}
             />
-            {/* <button onClick={sendMessage}>&#9658;</button> */}
           </div>
         </div>
-        {/* <UsersInRoom /> */}
         <Disk />
       </div>
     </div>

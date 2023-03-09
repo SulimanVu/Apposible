@@ -15,7 +15,7 @@
 .chatWindow {
   display: flex;
   width: 100%;
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 800px) {
     flex-direction: column;
     width: 100%;
     align-items: center;
@@ -30,6 +30,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
   .header {
     position: relative;
     padding: 5px 20px;

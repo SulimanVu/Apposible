@@ -38,14 +38,14 @@ const ChatInfo = () => {
         <div className={styles.header}>
           <div className={styles.image}>
             {room?.image ? (
-              <img src={room.image} />
+              <img src={room.image} alt="#" />
             ) : (
               <img src={require("../../images/room_logo.png")} alt="#" />
             )}
           </div>
           <div className={styles.info}>
             <h2>{room?.name}</h2>
-            <span>Группа: {room?.access.length}</span>
+            <span>Участников: {room?.access.length}</span>
           </div>
         </div>
         <button className={styles.addUser} onClick={handleOpen}>

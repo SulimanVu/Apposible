@@ -30,7 +30,7 @@ export const fetchFile = createAsyncThunk(
 );
 
 export const addDir = createAsyncThunk(
-  "add/dir",
+  "add/files",
   async ({ name, type, parent, room }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
@@ -58,12 +58,16 @@ const fileSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFile.fulfilled, (state, action) => {
-        state.currentDir = action.payload.file.find(
-          (item) => item.room === action.payload.room
-        );
+        // state.currentDir = action.payload.file.filter(
+        //   (item) => item.room === action.payload.room
+        // );
+        state.currentDir = action.payload.file;
         state.files = action.payload;
       })
-      .addCase(addDir.fulfilled, (state, action) => {});
+      .addCase(addDir.fulfilled, (state, action) => {
+        // console.log(action.payload);
+        state.files.file.push(action.payload);
+      });
   },
 });
 
