@@ -15,7 +15,6 @@ const ChatInfo = () => {
     state.room.room.find((item) => item._id === id)
   );
 
-  console.log(room);
   const handleOpen = (e) => {
     e.stopPropagation();
     setModal(true);

@@ -7,12 +7,24 @@ import { AiTwotoneFolderOpen } from "react-icons/ai";
 import { AiFillFileImage } from "react-icons/ai";
 import { AiFillFileWord } from "react-icons/ai";
 import { FaFilePowerpoint } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { fetchFile } from "../../../../features/fileSlice";
+import { useParams } from "react-router-dom";
 
 const File = ({ file }) => {
+  const { id } = useParams();
   const image = ["img", "jpeg", "jpg", "svg", "png"];
+  const dispatch = useDispatch();
+
+  const handleOpenDir = () => {
+    dispatch(fetchFile({ dirId: file?.parent, room: id }));
+  };
 
   return (
-    <div className={styles.file}>
+    <div
+      className={styles.file}
+      onClick={file.type === "dir" ? () => handleOpenDir() : ""}
+    >
       {file.type === "dir" && <AiTwotoneFolderOpen size={22} />}
       {file.type === "html" && <BsFiletypeHtml size={22} />}
       {file.type === "css" && <BsFiletypeScss size={22} />}
@@ -23,7 +35,7 @@ const File = ({ file }) => {
       {image.includes(file.type) && <AiFillFileImage size={22} />}
 
       <div className={styles.name}>{file.name}</div>
-      <div className={styles.date}>{file.date.slice(0, 10)}</div>
+      <div className={styles.date}>{file.date?.slice(0, 10)}</div>
       <div className={styles.size}>{file.size}</div>
     </div>
   );

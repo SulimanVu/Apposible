@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   files: [],
-  currentDir: null,
+  currentDir: [],
 };
 
 export const fetchFile = createAsyncThunk(
@@ -23,6 +23,30 @@ export const fetchFile = createAsyncThunk(
       );
       const file = await res.json();
       return { file, room };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const fetchDir = createAsyncThunk(
+  "fetch/dir",
+  async ({ dirId, room }, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(
+        `http://localhost:3001/api/files?room=${room}
+            ${dirId ? "&parent=" + dirId : ""}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      const file = await res.json();
+      return file;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -58,14 +82,13 @@ const fileSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFile.fulfilled, (state, action) => {
-        // state.currentDir = action.payload.file.filter(
-        //   (item) => item.room === action.payload.room
-        // );
         state.currentDir = action.payload.file;
         state.files = action.payload;
       })
+      .addCase(fetchDir.fulfilled, (state, action) => {
+        state.currentDir = action.payload;
+      })
       .addCase(addDir.fulfilled, (state, action) => {
-        // console.log(action.payload);
         state.files.file.push(action.payload);
       });
   },

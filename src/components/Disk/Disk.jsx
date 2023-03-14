@@ -10,12 +10,8 @@ const Disk = () => {
   const { id } = useParams();
   const dispath = useDispatch();
   const [modal, setModal] = useState(false);
-  // const currentDir = useSelector((state) => state.file.currentDir);
 
   const handleAddFile = () => {
-    // dispath(
-    //   addDir({ name: "Sul", parent: currentDir._id, type: "dir", room: id })
-    // );
     setModal(true);
   };
 
