@@ -13,9 +13,15 @@ const Popup = ({ st }) => {
   const handleChange = (e) => {
     setDirName(e.target.value);
   };
+
   const handleAddFile = () => {
     dispatch(
-      addDir({ name: dirName, parent: currentDir._id, type: "dir", room: id })
+      addDir({
+        name: dirName,
+        parent: currentDir._id,
+        type: dirName.match(/\.(\w+)/g)[0].slice(1),
+        room: id,
+      })
     );
     setDirName("");
   };
