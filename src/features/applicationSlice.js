@@ -22,6 +22,7 @@ export const fetchUsers = createAsyncThunk(
     }
   }
 );
+
 export const authSignIn = createAsyncThunk(
   "auth/signin",
   async ({ login, password }, thunkAPI) => {
@@ -70,6 +71,25 @@ export const authSignUp = createAsyncThunk(
   }
 );
 
+export const changeUser = createAsyncThunk(
+  "change/user",
+  async ({ id, name, email, login }, thunkAPI) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`http://localhost:3001/api/auth/user/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({ name, email, login }),
+      });
+
+      return res.json();
+    } catch (error) {}
+  }
+);
+
 const applicationSlice = createSlice({
   name: "application",
   initialState,
@@ -84,6 +104,14 @@ const applicationSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.users = action.payload;
+      })
+      .addCase(changeUser.fulfilled, (state, action) => {
+        state.users = state.users.filter((item) => {
+          if (item._id === action.payload._id) {
+            return action.payload;
+          }
+          return item;
+        });
       });
   },
 });

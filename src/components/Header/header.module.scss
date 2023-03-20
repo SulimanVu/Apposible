@@ -1,9 +1,10 @@
+@import "../../index.scss";
+
 .header {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #2b4f6c8b;
   position: absolute;
   top: 0;
   left: 0;
@@ -42,7 +43,7 @@
         li {
           text-transform: uppercase;
           font-weight: 500;
-          color: #fff;
+          color: #20c83e;
           transition: 0.2s;
           border-bottom: 2px solid transparent;
           cursor: pointer;
@@ -55,8 +56,8 @@
       .active {
         margin-bottom: 5px;
         border-bottom: 2px solid #01c38d;
-        li{
-          &:hover{
+        li {
+          &:hover {
             margin-bottom: 0;
             border-bottom: 2px solid transparent;
           }
