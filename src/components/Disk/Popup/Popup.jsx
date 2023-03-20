@@ -15,11 +15,15 @@ const Popup = ({ st }) => {
   };
 
   const handleAddFile = () => {
+    const type = dirName.includes(".")
+      ? dirName.match(/\.(\w+)/g)[0].slice(1)
+      : "dir";
+
     dispatch(
       addDir({
         name: dirName,
         parent: currentDir._id,
-        type: dirName.match(/\.(\w+)/g)[0].slice(1),
+        type,
         room: id,
       })
     );
@@ -30,7 +34,12 @@ const Popup = ({ st }) => {
     <div className={styles.popup}>
       <div className={styles.content}>
         <div className={styles.header}>
-          <div className={styles.title}>Создать новую папку</div>
+          <div className={styles.title}>
+            <span>Для создания файлы указывайте соответсвующее расширение</span>
+            <span>
+              Для создания папок указывать ничего кроме названия не нужно
+            </span>
+          </div>
           <button className={styles.close} onClick={() => st(false)}>
             X
           </button>

@@ -90,6 +90,7 @@ const fileSlice = createSlice({
       })
       .addCase(addDir.fulfilled, (state, action) => {
         state.files.file.push(action.payload);
+        state.currentDir.push(action.payload);
       });
   },
 });

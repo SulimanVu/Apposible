@@ -6,16 +6,24 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
+  background-attachment: fixed;
   display: flex;
   padding-left: 160px;
+  @media screen and (max-width: 800px) {
+    padding-left: 0;
+  }
   .main {
     height: 300px;
     color: red;
     display: flex;
-    flex-wrap: wrap;
+    @media screen and (max-width: 800px) {
+      flex-direction: column;
+      margin: 0 auto;
+    }
     .avatar {
       width: 300px;
+      margin: auto;
       display: flex;
       flex-direction: column;
       background-color: rgb(222, 221, 221);
@@ -47,10 +55,12 @@
     }
   }
   .info {
-    margin-top: 10px;
-    margin-left: 60px;
+    margin: auto auto auto 50px;
     display: flex;
     flex-direction: column;
+    @media screen and (max-width: 800px) {
+      margin: 40px auto auto;
+    }
     input {
       border: none;
       outline: none;

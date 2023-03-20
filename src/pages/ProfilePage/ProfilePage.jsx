@@ -1,19 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchUsers } from "../../features/applicationSlice";
+import { changeUser, fetchUsers } from "../../features/applicationSlice";
 import styles from "./profilepage.module.scss";
 import avatar from "../../images/avatar.svg";
 
 const ProfilePage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
+
   const user = useSelector((state) =>
     state.application.users.filter(
       (item) => item._id === localStorage.getItem("id") || item._id === id
     )
   );
 
+  const handleChangeUser = () => {
+    dispatch(changeUser({ id, name, email, login }));
+  };
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
@@ -39,10 +46,25 @@ const ProfilePage = () => {
               </div>
 
               <div className={styles.info}>
-                <input type="text" placeholder={item.name} />
-                <input type="text" placeholder={item.email} />
-                <input type="text" placeholder={item.login} />
-                <button>Сохранить</button>
+                <input
+                  type="text"
+                  placeholder={item.name}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder={item.email}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder={item.login}
+                  value={login}
+                  onChange={(e) => setLogin(e.target.value)}
+                />
+                <button onClick={handleChangeUser}>Сохранить</button>
               </div>
             </React.Fragment>
           );

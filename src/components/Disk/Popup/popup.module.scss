@@ -23,6 +23,24 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      .title {
+        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+        span:nth-child(2) {
+          font-size: 12px;
+          color: $orange;
+        }
+      }
+      button {
+        background-color: unset;
+        align-self: flex-start;
+        transition: 0.4s;
+        &:hover {
+          color: $b-green;
+          font-weight: 700;
+        }
+      }
     }
     .create {
       align-self: flex-end;

@@ -1,8 +1,4 @@
-:root {
-  --hue: 520;
-  --sat: 400;
-  --light: 41;
-}
+@import "../../index.scss";
 
 .header {
   width: 100%;
@@ -47,11 +43,7 @@
         li {
           text-transform: uppercase;
           font-weight: 500;
-          color: hsl(
-            var(--hue),
-            calc(var(--sat) * 1%),
-            calc(var(--light) * 1%)
-          );
+          color: #20c83e;
           transition: 0.2s;
           border-bottom: 2px solid transparent;
           cursor: pointer;

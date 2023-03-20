@@ -1,11 +1,12 @@
 @import "../../index.scss";
 
 .bg {
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(to right, rgb(0 0 0 / 0.8), rgb(0 0 0 / 0)),
     url("../../images/chat-bg.jpg");
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed;
   background-size: cover;
   padding: 100px 0 0 50px;
   @media screen and (max-width: 500px) {
@@ -33,9 +34,9 @@
   @media screen and (max-width: 800px) {
     flex-direction: column;
     width: 90%;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
+    // align-items: center;
+    // justify-content: center;
+    // margin: auto;
   }
   .header {
     position: relative;
@@ -76,6 +77,9 @@
         max-width: 48%;
         background-color: $w-green;
         align-self: flex-end;
+        @media screen and (max-width: 800px) {
+          width: 50%;
+        }
         .comment_footer {
           flex-direction: row-reverse;
         }
@@ -85,6 +89,9 @@
         max-width: 40%;
         background-color: $orange;
         align-self: flex-start;
+        @media screen and (max-width: 800px) {
+          width: 50%;
+        }
       }
     }
   }

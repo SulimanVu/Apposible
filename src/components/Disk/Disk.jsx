@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addDir, fetchFile } from "../../features/fileSlice";
+import { fetchFile } from "../../features/fileSlice";
 import FileList from "./FileList/FileList";
 import styles from "./disk.module.scss";
 import Popup from "./Popup/Popup";
@@ -25,7 +25,7 @@ const Disk = () => {
       <div className={styles.buttons}>
         <button className={styles.back}>Назад</button>
         <button className={styles.create} onClick={handleAddFile}>
-          Создать папку
+          Создать
         </button>
       </div>
       <FileList />
