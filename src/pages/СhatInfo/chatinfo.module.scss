@@ -24,7 +24,7 @@
         height: 100px;
         margin-right: 40px;
         overflow: hidden;
-        img{
+        img {
           width: 100%;
         }
       }
@@ -35,9 +35,9 @@
       padding: 5px 20px;
       border-radius: 8px;
       font-size: 16px;
-      transition: .3s;
+      transition: 0.3s;
       cursor: pointer;
-      &:hover{
+      &:hover {
         background-color: $w-green;
         color: #fff;
       }

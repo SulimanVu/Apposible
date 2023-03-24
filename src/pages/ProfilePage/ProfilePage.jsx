@@ -21,6 +21,7 @@ const ProfilePage = () => {
   const handleChangeUser = () => {
     dispatch(changeUser({ id, name, email, login }));
   };
+  
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
