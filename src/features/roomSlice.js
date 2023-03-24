@@ -142,7 +142,6 @@ const roomSlice = createSlice({
       })
       .addCase(fetchRoom.rejected, (state, action) => {
         state.loader = false;
-        console.log("slice rejected");
       })
       //////////DELETE-ROOM///////////
       .addCase(deleteRoom.fulfilled, (state, action) => {
@@ -154,7 +153,6 @@ const roomSlice = createSlice({
       })
       .addCase(deleteRoom.rejected, (state, action) => {
         state.loader = false;
-        console.log("slice rejected");
       })
       //////////ADD-USER-ROOM///////////
       .addCase(addUserRoom.fulfilled, (state, action) => {
@@ -171,7 +169,6 @@ const roomSlice = createSlice({
       })
       .addCase(addUserRoom.rejected, (state, action) => {
         state.loader = false;
-        console.log("slice rejected");
       })
       //////////DELETE-USER-ROOM///////////
       .addCase(deleteUser.fulfilled, (state, action) => {
@@ -188,7 +185,6 @@ const roomSlice = createSlice({
       })
       .addCase(deleteUser.rejected, (state) => {
         state.loader = false;
-        console.log("slice rejected");
       })
       //////////ADD-ROOM///////////
       .addCase(createRoom.fulfilled, (state, action) => {
@@ -200,25 +196,7 @@ const roomSlice = createSlice({
       })
       .addCase(createRoom.rejected, (state) => {
         state.loader = false;
-        console.log("slice rejected");
       });
-    //////////ADD-COMMENT///////////
-    // .addCase(addComment.fulfilled, (state, action) => {
-    //   state.room = state.room.map((item) => {
-    //     if (item._id === action.payload._id) {
-    //       item.users.push(action.payload);
-    //     }
-    //     return item;
-    //   });
-    //   state.loader = false;
-    // })
-    // .addCase(addComment.pending, (state, action) => {
-    //   state.loader = true;
-    // })
-    // .addCase(addComment.rejected, (state, action) => {
-    //   state.loader = false;
-    //   console.log("slice rejected");
-    // });
   },
 });
 

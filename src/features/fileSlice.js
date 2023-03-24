@@ -7,12 +7,11 @@ const initialState = {
 
 export const fetchFile = createAsyncThunk(
   "fetch/files",
-  async ({ dirId, room }, thunkAPI) => {
+  async ({ parent, room }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:3001/api/files?room=${room}
-            ${dirId ? "&parent=" + dirId : ""}`,
+        `http://localhost:3001/api/files?room=${room}${parent ? "&parent=" + parent : ""}`,
         {
           method: "GET",
           headers: {

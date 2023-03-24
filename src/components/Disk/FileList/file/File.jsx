@@ -17,7 +17,7 @@ const File = ({ file }) => {
   const dispatch = useDispatch();
 
   const handleOpenDir = () => {
-    dispatch(fetchFile({ dirId: file?.parent, room: id }));
+    dispatch(fetchFile({ parent: file?._id, room: id }));
   };
 
   return (

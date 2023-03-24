@@ -22,7 +22,7 @@ const FileList = () => {
         <div className={styles.size}>Размер</div>
       </div>
       {files?.map((file) => {
-        return <File key={file._id} file={file} />;
+        return <File key={file?._id} file={file} />;
       })}
     </div>
   );

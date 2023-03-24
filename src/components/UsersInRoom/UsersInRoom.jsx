@@ -17,7 +17,6 @@ const UsersInRoom = () => {
 
   return (
     <div className={styles.users}>
-      {/* <div className={styles.head}>Участники комнаты:</div> */}
       {room?.access.map((item) => {
         return (
           <div className={styles.body} key={item._id}>
