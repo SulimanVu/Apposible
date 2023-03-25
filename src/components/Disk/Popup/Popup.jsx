@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addDir } from "../../../features/fileSlice";
+import { addDir, fetchFile } from "../../../features/fileSlice";
 import styles from "./popup.module.scss";
 
 const Popup = ({ st }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [dirName, setDirName] = useState("");
-  const currentDir = useSelector((state) => state.file.currentDir);
 
   const handleChange = (e) => {
     setDirName(e.target.value);
@@ -19,17 +18,27 @@ const Popup = ({ st }) => {
       ? dirName.match(/\.(\w+)/g)[0].slice(1)
       : "dir";
 
-    dispatch(
-      addDir({
-        name: dirName,
-        parent: currentDir._id,
-        type,
-        room: id,
-      })
-    );
+    const parent = localStorage.getItem("dir")
+      ? localStorage.getItem("dir")
+      : undefined;
+
+    if (dirName) {
+      dispatch(
+        addDir({
+          name: dirName,
+          parent,
+          type,
+          room: id,
+        })
+      );
+    }
+
     setDirName("");
   };
 
+  useEffect(() => {
+    dispatch(fetchFile());
+  }, [dispatch]);
   return (
     <div className={styles.popup}>
       <div className={styles.content}>

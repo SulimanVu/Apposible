@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./fileList.module.scss";
 import File from "./file/File";
-import { fetchDir, fetchFile } from "../../../features/fileSlice";
+import { fetchFile } from "../../../features/fileSlice";
 import { useParams } from "react-router-dom";
 
 const FileList = () => {
@@ -11,8 +11,8 @@ const FileList = () => {
   const files = useSelector((state) => state.file.currentDir);
 
   useEffect(() => {
-    dispath(fetchDir({ dirId: files?._id, room: id }));
-  }, [dispath, id]);
+    dispath(fetchFile({ dirId: files._id, room: id }));
+  }, [dispath, id, files._id]);
 
   return (
     <div className={styles.fileList}>
@@ -21,8 +21,8 @@ const FileList = () => {
         <div className={styles.date}>Время</div>
         <div className={styles.size}>Размер</div>
       </div>
-      {files?.map((file) => {
-        return <File key={file?._id} file={file} />;
+      {files.map((file) => {
+        return <File key={file._id} file={file} />;
       })}
     </div>
   );
