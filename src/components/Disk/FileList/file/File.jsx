@@ -18,6 +18,7 @@ const File = ({ file }) => {
 
   const handleOpenDir = () => {
     dispatch(fetchFile({ parent: file._id, room: id }));
+    localStorage.setItem("dir", file._id);
   };
 
   return (
