@@ -11,6 +11,11 @@
       border-radius: 8px;
       border: none;
       white-space: nowrap;
+      transition: 0.4s;
+      &:hover {
+        background-color: $w-green;
+        color: #fff;
+      }
     }
     .create {
       margin-left: 20px;
@@ -26,6 +31,12 @@
         padding: 5px 10px;
         cursor: pointer;
         margin-left: 10px;
+        transition: 0.4s;
+        &:hover {
+          background-color: #fff;
+          color: $w-green;
+          border: 2px dashed $w-green;
+        }
       }
       input {
         display: none;
