@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addDir, fetchFile } from "../../../features/fileSlice";
+import { addDir, fetchFile, modalTrigger } from "../../../features/fileSlice";
 import styles from "./popup.module.scss";
 
-const Popup = ({ st }) => {
+const Popup = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [dirName, setDirName] = useState("");
+  const modal = useSelector((state) => state.file.modal);
 
   const handleChange = (e) => {
     setDirName(e.target.value);
+  };
+
+  const handleClose = () => {
+    dispatch(modalTrigger(!modal));
   };
 
   const handleAddFile = () => {
@@ -49,7 +54,7 @@ const Popup = ({ st }) => {
               Для создания папок указывать ничего кроме названия не нужно
             </span>
           </div>
-          <button className={styles.close} onClick={() => st(false)}>
+          <button className={styles.close} onClick={handleClose}>
             X
           </button>
         </div>

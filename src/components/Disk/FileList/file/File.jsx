@@ -18,12 +18,13 @@ const File = ({ file }) => {
 
   const handleOpenDir = () => {
     dispatch(fetchFile({ parent: file._id, room: id }));
+    localStorage.setItem("dir", file._id);
   };
 
   return (
     <div
       className={styles.file}
-      onClick={file.type === "dir" ? () => handleOpenDir() : ""}
+      onClick={file.type === "dir" ? () => handleOpenDir() : null}
     >
       {file.type === "dir" && <AiTwotoneFolderOpen size={22} />}
       {file.type === "html" && <BsFiletypeHtml size={22} />}
