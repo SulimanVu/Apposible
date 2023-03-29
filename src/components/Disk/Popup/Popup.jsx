@@ -17,7 +17,7 @@ const Popup = () => {
   const handleClose = () => {
     dispatch(modalTrigger(!modal));
   };
-  
+
   const handleAddFile = () => {
     const type = dirName.includes(".")
       ? dirName.match(/\.(\w+)/g)[0].slice(1)

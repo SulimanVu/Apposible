@@ -54,49 +54,32 @@ export const addDir = createAsyncThunk(
 );
 
 export const uploadFile = createAsyncThunk(
-  "upload/files",
-  async ({ file, parent, room }, thunkAPI) => {
+  "files/upload",
+  async ({ file, parent, room }, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("token");
       const formData = new FormData();
       formData.append("file", file);
-
+      formData.append("room", room);
       if (parent) {
         formData.append("parent", parent);
       }
+      const response = await fetch("http://localhost:3001/api/files/upload", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: formData,
+      });
 
-      const res = await fetch(
-        `http://localhost:3001/api/files/upload?room=${room}${
-          parent ? "&parent=" + parent : ""
-        }`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: formData,
-          onUploadProgress: (progressEvent) => {
-            const totalLength = progressEvent.lengthComputable
-              ? progressEvent.total
-              : progressEvent.target.getResponseHeader("content-length") ||
-                progressEvent.target.getResponseHeader(
-                  "x-decompressed-content-length"
-                );
-            if (totalLength) {
-              let progress = Math.round(
-                (progressEvent.loaded * 100) / totalLength
-              );
-              console.log(progress);
-            }
-          },
-        }
-      );
+      if (!response.ok) {
+        const errorMessage = await response.json();
+        return rejectWithValue(errorMessage.message);
+      }
 
-      const data = await res.json();
+      const data = await response.json();
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -105,8 +88,8 @@ const fileSlice = createSlice({
   name: "file",
   initialState,
   reducers: {
-    modalTrigger(state) {
-      state.modal = true;
+    modalTrigger(state, action) {
+      state.modal = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -120,7 +103,6 @@ const fileSlice = createSlice({
         state.currentDir.push(action.payload);
       })
       .addCase(uploadFile.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.files.file.push(action.payload);
         state.currentDir.push(action.payload);
       });
