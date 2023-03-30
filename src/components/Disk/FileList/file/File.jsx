@@ -2,12 +2,17 @@ import React from "react";
 import styles from "./file.module.scss";
 import { BsFiletypeHtml } from "react-icons/bs";
 import { BsFiletypeScss } from "react-icons/bs";
+import { BsFiletypeTxt } from "react-icons/bs";
+import { BsFiletypeXlsx } from "react-icons/bs";
+import { BsFiletypePhp } from "react-icons/bs";
 import { SiJavascript } from "react-icons/si";
 import { AiTwotoneFolderOpen } from "react-icons/ai";
 import { AiFillFileImage } from "react-icons/ai";
+import { AiOutlineFilePdf } from "react-icons/ai";
 import { AiFillFileWord } from "react-icons/ai";
 import { FaFilePowerpoint } from "react-icons/fa";
 import { FaRegFileArchive } from "react-icons/fa";
+import { FaPython } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { fetchFile } from "../../../../features/fileSlice";
 import { useParams } from "react-router-dom";
@@ -33,7 +38,12 @@ const File = ({ file }) => {
       {file.type === "js" && <SiJavascript size={22} />}
       {file.type === "pptx" && <FaFilePowerpoint size={22} />}
       {file.type === "docx" && <AiFillFileWord size={22} />}
+      {file.type === "xlsx" && <BsFiletypeXlsx size={22} />}
+      {file.type === "txt" && <BsFiletypeTxt size={22} />}
       {file.type === "rar" && <FaRegFileArchive size={22} />}
+      {file.type === "pdf" && <AiOutlineFilePdf size={22} />}
+      {file.type === "py" && <FaPython size={22} />}
+      {file.type === "php" && <BsFiletypePhp size={22} />}
 
       {image.includes(file.type) && <AiFillFileImage size={22} />}
 
