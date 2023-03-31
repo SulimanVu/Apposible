@@ -84,6 +84,65 @@ export const uploadFile = createAsyncThunk(
   }
 );
 
+export const downloadFile = createAsyncThunk(
+  "download/file",
+  async ({ file, room }, { rejectWithValue }) => {
+    try {
+      const res = await fetch(
+        `http://localhost:3001/api/files/download?room=${room}&id=${file._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        const blob = await res.blob();
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = file.name;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteFile = createAsyncThunk(
+  "delete/file",
+  async ({ file, room }, { rejectWithValue }) => {
+    try {
+      const res = await fetch(
+        `http://localhost:3001/api/files?room=${room}&id=${file._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        const blob = await res.blob();
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = file.name;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
+
+      return room;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const fileSlice = createSlice({
   name: "file",
   initialState,
@@ -105,6 +164,9 @@ const fileSlice = createSlice({
       .addCase(uploadFile.fulfilled, (state, action) => {
         state.files.file.push(action.payload);
         state.currentDir.push(action.payload);
+      })
+      .addCase(deleteFile.fulfilled, (state, action) => {
+        state.currentDir.filter((item) => item._id !== action.payload);
       });
   },
 });

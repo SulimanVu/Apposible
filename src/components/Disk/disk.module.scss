@@ -2,6 +2,10 @@
 
 .disk {
   margin: 20px;
+  width: 45%;
+  @media screen and (max-width: 800px) {
+    width: 90%; 
+  }
   .buttons {
     display: flex;
     button {
@@ -43,4 +47,15 @@
       }
     }
   }
+}
+
+.drop_area{
+  width: 100%;
+  height: calc(100vh - 50px - 40px);
+  margin: 20px;
+  border: dashed $orange 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
 }

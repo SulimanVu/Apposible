@@ -20,6 +20,7 @@ const FileList = () => {
         <div className={styles.name}>Название</div>
         <div className={styles.date}>Время</div>
         <div className={styles.size}>Размер</div>
+        <div className={styles.buttons}>Действия</div>
       </div>
       {files.map((file) => {
         return <File key={file._id} file={file} />;
