@@ -2,6 +2,10 @@
 
 .disk {
   margin: 20px;
+  width: 45%;
+  @media screen and (max-width: 800px) {
+    width: 90%; 
+  }
   .buttons {
     display: flex;
     button {

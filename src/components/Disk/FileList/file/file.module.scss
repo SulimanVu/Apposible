@@ -1,22 +1,51 @@
 .file {
   display: grid;
-  grid-template-columns: 1fr 4fr repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
   margin-top: 10px;
-  &:hover {
-    transform: scale(1.01);
-    cursor: pointer;
+  cursor: default;
+  @media screen and (max-width: 530px) {
+    grid-template-columns: 1fr 1fr 1fr;
   }
   .name {
-    grid-column-start: 2;
+    grid-column-start: 1;
+    display: flex;
+    align-items: center;
+    span {
+      margin-left: 10px;
+    }
   }
   .date {
-    grid-column-start: 3;
+    grid-column-start: 2;
     justify-self: center;
-    white-space: nowrap;
+    @media screen and (max-width: 530px) {
+      display: none;
+    }
   }
   .size {
-    grid-column-start: 5;
+    grid-column-start: 3;
     justify-self: center;
+    @media screen and (max-width: 530px) {
+      grid-column-start: 2;
+    }
+  }
+  .buttons {
+    width: 50%;
+    display: flex;
+    grid-column-start: 4;
+    justify-self: center;
+    justify-content: flex-end;
+    button{
+      background: none;
+    }
+    @media screen and (max-width: 530px) {
+      grid-column-start: 3;
+    }
+  }
+}
+.dir {
+  &:hover {
+    transform: scale(1.007);
+    cursor: pointer;
   }
 }
