@@ -166,7 +166,7 @@ const fileSlice = createSlice({
         state.currentDir.push(action.payload);
       })
       .addCase(deleteFile.fulfilled, (state, action) => {
-        state.currentDir.filter((item) => item._id !== action.payload);
+        state.currentDir.filter((item) => item._id === action.payload);
       });
   },
 });
