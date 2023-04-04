@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import styles from "./file.module.scss";
 import { BsFiletypeHtml } from "react-icons/bs";
 import { BsFiletypeScss } from "react-icons/bs";
@@ -15,7 +14,7 @@ import { FaFilePowerpoint } from "react-icons/fa";
 import { FaRegFileArchive } from "react-icons/fa";
 import { FaFileDownload } from "react-icons/fa";
 import { FaPython } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   deleteFile,
   downloadFile,
@@ -77,11 +76,11 @@ const File = ({ file }) => {
       <div className={styles.buttons}>
         {file.type !== "dir" && (
           <button>
-            <FaFileDownload onClick={handleDownLoad} size={22} />
+            <FaFileDownload onClick={(e) => handleDownLoad(e)} size={22} />
           </button>
         )}
         <button>
-          <AiFillDelete onClick={handleDelete} size={24} />
+          <AiFillDelete onClick={(e) => handleDelete(e)} size={24} />
         </button>
       </div>
     </div>
