@@ -8,7 +8,7 @@ import MainPage from "./pages/MainPage/MainPage";
 import SignIn from "./components/Login/SignIn";
 import SignUp from "./components/Registr/SignUp";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import ChatInfo from "./pages/СhatInfo/ChatInfo";
+import ChatInfo from "./pages/ChatInfo/ChatInfo";
 
 function App() {
   const location = useLocation();
@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       {location.pathname === "/signin" ||
-      location.pathname === "/signup" ? null : (
+        location.pathname === "/signup" ? null : (
         <Header />
       )}
       <Routes>
