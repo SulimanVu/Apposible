@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { serverUrl } from "../serverUrl";
 
 const initialState = {
   room: [],
@@ -8,7 +9,7 @@ const initialState = {
 export const fetchRoom = createAsyncThunk("fetch/room", async (_, thunkAPI) => {
   try {
     const token = localStorage.getItem("token");
-    const res = await fetch(`http://localhost:3001/room`, {
+    const res = await fetch(`${serverUrl}/room`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +28,7 @@ export const createRoom = createAsyncThunk(
   async ({ id, name }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3001/room/create/${id}`, {
+      const res = await fetch(`${serverUrl}/room/create/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +49,7 @@ export const deleteRoom = createAsyncThunk(
   async ({ id }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3001/room/delete/${id}`, {
+      const res = await fetch(`${serverUrl}/room/delete/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +69,7 @@ export const addUserRoom = createAsyncThunk(
   async ({ id, user }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3001/room/addUser/${id}`, {
+      const res = await fetch(`${serverUrl}/room/addUser/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +90,7 @@ export const deleteUser = createAsyncThunk(
   async ({ id, user }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3001/room/deleteUser/${id}`, {
+      const res = await fetch(`${serverUrl}/room/deleteUser/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -110,7 +111,7 @@ export const addComment = createAsyncThunk(
   async ({ id, user, comment, time }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3001/room/addComment/${id}`, {
+      const res = await fetch(`${serverUrl}/room/addComment/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

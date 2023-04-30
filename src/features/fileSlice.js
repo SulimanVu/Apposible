@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { serverUrl } from "../serverUrl";
 
 const initialState = {
   file: '',
@@ -12,7 +13,7 @@ export const fetchFile = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:3001/api/files?room=${room}${parent ? "&parent=" + parent : ""
+        `${serverUrl}/api/files?room=${room}${parent ? "&parent=" + parent : ""
         }`,
         {
           method: "GET",
@@ -35,7 +36,7 @@ export const getFile = createAsyncThunk(
   async ({ name }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3001/api/files/file?name=${name}`, {
+      const res = await fetch(`${serverUrl}/api/files/file?name=${name}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +58,7 @@ export const addDir = createAsyncThunk(
   async ({ name, type, parent, room }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3001/api/files`, {
+      const res = await fetch(`${serverUrl}/api/files`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +85,7 @@ export const uploadFile = createAsyncThunk(
       if (parent) {
         formData.append("parent", parent);
       }
-      const response = await fetch("http://localhost:3001/api/files/upload", {
+      const response = await fetch(`${serverUrl}/api/files/upload`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -110,7 +111,7 @@ export const downloadFile = createAsyncThunk(
   async ({ file, room }, { rejectWithValue }) => {
     try {
       const res = await fetch(
-        `http://localhost:3001/api/files/download?room=${room}&id=${file._id}`,
+        `${serverUrl}/api/files/download?room=${room}&id=${file._id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -138,7 +139,7 @@ export const deleteFile = createAsyncThunk(
   async ({ file, room }, { rejectWithValue }) => {
     try {
       const res = await fetch(
-        `http://localhost:3001/api/files?room=${room}&id=${file._id}`,
+        `${serverUrl}/api/files?room=${room}&id=${file._id}`,
         {
           method: "DELETE",
           headers: {
