@@ -21,22 +21,22 @@ const Footer = () => {
         <ul>
           <li>
             <a href="#">
-              <img src={require("../../images/facebook.png")} alt="" />
+              <img src={require("../../images/facebook.png")} alt="#" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src={require("../../images/linkedin.png")} alt="" />
+              <img src={require("../../images/linkedin.png")} alt="#" />
             </a>
           </li>
           <li>
             <a href="https://telegram.me/frontend_develope" target="_blank">
-              <img src={require("../../images/telegram.png")} alt="" />
+              <img src={require("../../images/telegram.png")} alt="#" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src={require("../../images/twitter.png")} alt="" />
+              <img src={require("../../images/twitter.png")} alt="#" />
             </a>
           </li>
           <li>
@@ -44,7 +44,7 @@ const Footer = () => {
               href="https://api.whatsapp.com/send?phone={{89065253497}}"
               target="_blank"
             >
-              <img src={require("../../images/whatsapp.png")} alt="" />
+              <img src={require("../../images/whatsapp.png")} alt="#" />
             </a>
           </li>
         </ul>

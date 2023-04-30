@@ -10,9 +10,11 @@ footer {
   justify-content: space-around;
   align-items: center;
   background-color: $b-blue;
+
   ul {
     list-style: none;
   }
+
   .trend,
   .contact {
     li {
@@ -24,12 +26,14 @@ footer {
       overflow: visible;
       white-space: nowrap;
       cursor: pointer;
+
       &:hover {
         animation-duration: 2s;
         animation-name: li_underline;
       }
     }
   }
+
   .follow {
     margin: 0 auto;
     text-align: center;
@@ -38,6 +42,7 @@ footer {
     flex-direction: column;
     align-items: center;
     align-content: center;
+
     ul {
       display: flex;
       margin: 0;
@@ -51,6 +56,7 @@ footer {
     border-bottom: 2px solid #01c38d;
     width: 0%;
   }
+
   100% {
     border-bottom: 2px solid #01c38d;
     width: 100%;
