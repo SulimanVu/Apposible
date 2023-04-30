@@ -28,6 +28,7 @@ function App() {
         <Route path="/login" element={<FormRegistration />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        {/* <Route path={`/api/files/file/:name`} element={<Doc />} /> */}
       </Routes>
     </div>
   );

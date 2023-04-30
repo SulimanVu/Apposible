@@ -18,14 +18,15 @@ import { useDispatch } from "react-redux";
 import {
   deleteFile,
   downloadFile,
-  fetchFile,
+  fetchFile
 } from "../../../../features/fileSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const File = ({ file }) => {
   const { id } = useParams();
-  const image = ["img", "jpeg", "jpg", "svg", "png"];
+  const navigate = useNavigate()
   const dispatch = useDispatch();
+  const image = ["img", "jpeg", "jpg", "svg", "png"];
 
   const handleOpenDir = () => {
     dispatch(fetchFile({ parent: file._id, room: id }));
@@ -41,6 +42,10 @@ const File = ({ file }) => {
     dispatch(deleteFile({ file, room: id }));
   };
 
+  const handleView = (e) => {
+    navigate(`/api/files/file/${e.target.innerHTML}`)
+  }
+
   return (
     <div
       className={
@@ -48,7 +53,7 @@ const File = ({ file }) => {
       }
       onClick={file.type === "dir" ? () => handleOpenDir() : null}
     >
-      <div className={styles.name}>
+      <div className={styles.name} onClick={handleView}>
         {file.type === "dir" && <AiTwotoneFolderOpen size={22} />}
         {file.type === "html" && <BsFiletypeHtml size={22} />}
         {file.type === "css" && <BsFiletypeScss size={22} />}
