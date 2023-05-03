@@ -11,7 +11,7 @@ const Header = () => {
 
   const chat = params.pathname.includes("chat");
   const profile = params.pathname.includes("profile");
-
+  
   return (
     <header className={styles.header}>
       <div className={styles.logo}>

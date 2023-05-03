@@ -43,20 +43,17 @@ const MainInfo = () => {
         </motion.p>
       </div>
       <div className={styles.container}>
-        <motion.p
-          initial={{ opacity: 0, x: -400 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 2 }}
+        <p
+          
         >
           Хотите работать в команде и всегда оставаться на связи?
           <br />
           <br />
           Не проблема! Вы можете комментировать свои действия, общаться с
           командой, делиться ходом работы и просто общаться
-        </motion.p>
-
+        </p>
         <div className={styles.img_block_2}>
-          <motion.img
+          <img
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1.8 }}
