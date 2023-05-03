@@ -9,6 +9,7 @@
   top: 0;
   left: 0;
   z-index: 2;
+
   .logo {
     width: 100px;
     height: 60px;
@@ -16,21 +17,25 @@
     display: flex;
     align-items: center;
     object-fit: cover;
+
     img {
       filter: invert(100%);
       height: 44px;
       transition: 0.4s;
       cursor: pointer;
+
       &:hover {
         scale: 1.1;
         filter: invert(70%);
       }
     }
   }
+
   .nav_top {
     width: 80%;
     display: flex;
     justify-content: flex-end;
+
     ul {
       display: flex;
       align-items: center;
@@ -38,8 +43,10 @@
       list-style-type: none;
       justify-content: space-between;
       margin-right: 5%;
+
       .link {
         text-decoration: none;
+
         li {
           text-transform: uppercase;
           font-weight: 500;
@@ -47,15 +54,18 @@
           transition: 0.2s;
           border-bottom: 2px solid transparent;
           cursor: pointer;
+
           &:hover {
             margin-bottom: 5px;
             border-bottom: 2px solid #01c38d;
           }
         }
       }
+
       .active {
         margin-bottom: 5px;
         border-bottom: 2px solid #01c38d;
+
         li {
           &:hover {
             margin-bottom: 0;
@@ -70,6 +80,7 @@
         color: silver;
         border-bottom: none;
         cursor: default;
+
         &:hover {
           margin-bottom: 0;
           border-bottom: 0;
@@ -78,6 +89,71 @@
     }
   }
 }
+
 .link_mg {
   margin-left: 100px;
+}
+
+
+footer {
+  width: 100%;
+  height: 200px;
+  padding: 20px 40px;
+  color: #fff;
+  border-top: 2px solid #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $b-blue;
+
+  ul {
+    list-style: none;
+  }
+
+  .trend,
+  .contact {
+    li {
+      line-height: 30px;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #fff;
+      border-bottom: 2px solid transparent;
+      overflow: visible;
+      white-space: nowrap;
+      cursor: pointer;
+
+      &:hover {
+        animation-duration: 2s;
+        animation-name: li_underline;
+      }
+    }
+  }
+
+  .follow {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+
+    ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+@keyframes li_underline {
+  0% {
+    border-bottom: 2px solid #01c38d;
+    width: 0%;
+  }
+
+  100% {
+    border-bottom: 2px solid #01c38d;
+    width: 100%;
+  }
 }
