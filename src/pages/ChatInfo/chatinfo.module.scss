@@ -3,7 +3,6 @@
 .main {
   margin-top: 60px;
   .window {
-    position: relative;
     width: 70%;
     padding: 20px;
     margin: 0 auto;
@@ -14,23 +13,27 @@
     .header {
       margin-bottom: 20px;
       display: flex;
-      .info {
+      justify-content: space-between;
+      .leftSide {
         display: flex;
-        flex-direction: column;
-        h2{
-          white-space: nowrap;
-          color: #fff;
+        .info {
+          display: flex;
+          flex-direction: column;
+          h2 {
+            white-space: nowrap;
+            color: #fff;
+          }
         }
-      }
-      .image {
-        border-radius: 100%;
-        background-color: $w-green;
-        width: 100px;
-        height: 100px;
-        margin-right: 40px;
-        overflow: hidden;
-        img {
-          width: 100%;
+        .image {
+          border-radius: 100%;
+          background-color: $w-green;
+          width: 100px;
+          height: 100px;
+          margin-right: 40px;
+          overflow: hidden;
+          img {
+            width: 100%;
+          }
         }
       }
     }
@@ -47,8 +50,13 @@
         color: #fff;
       }
     }
+    .addTask {
+      background-color: transparent;
+      margin-top: 20px;
+      color: #fff;
+    }
   }
-  .tasks{
+  .tasks {
     width: 70%;
     margin: 20px auto;
     color: #fff;

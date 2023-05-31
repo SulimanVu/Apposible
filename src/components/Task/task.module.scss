@@ -15,15 +15,40 @@
     box-sizing: border-box;
     transition: all 0.4s;
     cursor: pointer;
+    .info {
+      display: flex;
+      flex-direction: column;
+      div span:first-child{
+        color: black;
+      }
+      .user{
+        margin: 10px 0;
+        color: rgb(89, 255, 0);
+      }
+    }
     &:not(:first-child) {
       margin-left: 1%;
     }
     &:hover {
-      height: 250px;
+      height: 270px;
+      .header::after {
+        background: linear-gradient(180deg, transparent, transparent 100%);
+      }
     }
-    h3 {
-      margin-top: 0;
-      cursor: pointer;
+    .header {
+      width: 200px;
+      overflow: hidden;
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, transparent, $orange 100%);
+        transition: all 0.4s;
+      }
     }
   }
 }
