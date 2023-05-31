@@ -5,6 +5,8 @@ import UsersModal from "../../components/UsersModal/UsersModal";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRoom } from "../../features/roomSlice";
+import { fetchTasksInRoom } from "../../features/taskSlice";
+import Task from "../../components/Task/Task";
 
 const ChatInfo = () => {
   const { id } = useParams();
@@ -28,7 +30,8 @@ const ChatInfo = () => {
 
   useEffect(() => {
     dispatch(fetchRoom());
-  }, [dispatch]);
+    dispatch(fetchTasksInRoom(id));
+  }, [dispatch, id]);
 
   return (
     <div className={styles.main} onClick={(e) => handleClose(e)}>
@@ -52,6 +55,8 @@ const ChatInfo = () => {
         </button>
         <UsersInRoom />
       </div>
+      <h2 className={styles.tasks}>Задачи к выполнению</h2>
+      <Task />
     </div>
   );
 };

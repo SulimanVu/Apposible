@@ -6,16 +6,21 @@
     position: relative;
     width: 70%;
     padding: 20px;
-    margin: auto;
+    margin: 0 auto;
     border-radius: 8px;
     background-color: $b-green;
     color: $yellow;
+    box-sizing: border-box;
     .header {
       margin-bottom: 20px;
       display: flex;
       .info {
         display: flex;
         flex-direction: column;
+        h2{
+          white-space: nowrap;
+          color: #fff;
+        }
       }
       .image {
         border-radius: 100%;
@@ -42,5 +47,10 @@
         color: #fff;
       }
     }
+  }
+  .tasks{
+    width: 70%;
+    margin: 20px auto;
+    color: #fff;
   }
 }

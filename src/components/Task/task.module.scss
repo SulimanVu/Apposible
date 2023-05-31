@@ -1,0 +1,29 @@
+@import "../../index.scss";
+
+.tasksBlock {
+  width: 70%;
+  margin: 10px auto;
+  display: flex;
+  .item {
+    background-color: $orange;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    width: 23%;
+    height: 62px;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: all 0.4s;
+    cursor: pointer;
+    &:not(:first-child) {
+      margin-left: 1%;
+    }
+    &:hover {
+      height: 250px;
+    }
+    h3 {
+      margin-top: 0;
+      cursor: pointer;
+    }
+  }
+}

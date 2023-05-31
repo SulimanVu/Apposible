@@ -34,7 +34,7 @@ const MainInfo = () => {
         </div>
         <motion.p
           initial={{ opacity: 0, x: -400 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          whileInView={{ opacity: 1, x: -100 }}
           transition={{ duration: 2, delay: 2 }}
         >
           Возможность работать и сохранять файлы различных форматов, в числе
