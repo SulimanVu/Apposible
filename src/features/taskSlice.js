@@ -84,6 +84,25 @@ export const fetchTasksInRoom = createAsyncThunk(
   }
 );
 
+export const deleteTask = createAsyncThunk(
+  "delete/task",
+  async (id, thunkAPI) => {
+    try {
+      const res = await fetch(`${serverUrl}/task/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = res.json();
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const taskSlice = createSlice({
   name: "task",
   initialState,
@@ -106,6 +125,11 @@ const taskSlice = createSlice({
           }
           return item;
         });
+      })
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        state.tasksInRoom = state.tasksInRoom.filter(
+          (item) => item._id !== action.payload._id
+        );
       }),
 });
 

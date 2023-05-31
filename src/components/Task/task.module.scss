@@ -5,6 +5,7 @@
   margin: 10px auto;
   display: flex;
   .item {
+    position: relative;
     background-color: $orange;
     color: #fff;
     border-radius: 8px;
@@ -18,13 +19,19 @@
     .info {
       display: flex;
       flex-direction: column;
-      div span:first-child{
+      div span:first-child {
         color: black;
       }
-      .user{
+      .user {
         margin: 10px 0;
         color: rgb(89, 255, 0);
       }
+    }
+    .delete {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 24px;
     }
     &:not(:first-child) {
       margin-left: 1%;
