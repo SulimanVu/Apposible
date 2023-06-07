@@ -55,7 +55,6 @@
       @media screen and (max-width: 500px) {
         width: 100%;
       }
-
       .link {
         text-decoration: none;
 
@@ -66,7 +65,8 @@
           transition: 0.2s;
           border-bottom: 2px solid transparent;
           cursor: pointer;
-
+          box-sizing: border-box;
+          
           @media screen and (max-width: 500px) {
             margin-right: 10px;
           }
@@ -109,7 +109,6 @@
 .link_mg {
   margin-left: 100px;
 }
-
 
 footer {
   width: 100%;

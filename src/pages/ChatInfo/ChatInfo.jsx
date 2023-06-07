@@ -46,7 +46,7 @@ const ChatInfo = () => {
     dispatch(fetchRoom());
     dispatch(fetchTasksInRoom(id));
     dispatch(fetchUsers());
-  }, [dispatch, id]);
+  }, [dispatch, id, user]);
 
   return (
     <div className={styles.main} onClick={(e) => handleClose(e)}>

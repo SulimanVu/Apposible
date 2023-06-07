@@ -6,22 +6,25 @@ const initialState = {
   loader: false,
 };
 
-export const fetchRoom = createAsyncThunk("fetch/room", async (_, thunkAPI) => {
-  try {
-    const token = localStorage.getItem("token");
-    const res = await fetch(`${serverUrl}/room`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    });
-    const room = await res.json();
-    return room;
-  } catch (error) {
-    thunkAPI.rejectWithValue(error);
+export const fetchRoom = createAsyncThunk(
+  "fetch/room",
+  async ({ id }, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${serverUrl}/room/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      const room = await res.json();
+      return room;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
   }
-});
+);
 
 export const createRoom = createAsyncThunk(
   "create/room",
@@ -36,6 +39,7 @@ export const createRoom = createAsyncThunk(
         },
         body: JSON.stringify({ name, access: id, admin: name }),
       });
+
       const room = await res.json();
       return room;
     } catch (error) {
