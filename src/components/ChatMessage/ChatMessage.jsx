@@ -79,7 +79,7 @@ const Chat = () => {
 
   useEffect(() => {
     dispath(fetchUsers());
-    dispath(fetchRoom());
+    dispath(fetchRoom({id:userID}));
   }, [dispath]);
 
   return (
