@@ -1,0 +1,16 @@
+.webRoom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 100vh;
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        video{
+            width: 80%;
+            height: 100%;
+        }
+    }
+}

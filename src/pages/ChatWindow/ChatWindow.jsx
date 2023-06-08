@@ -9,7 +9,6 @@ import styles from "./chatwindow.module.scss";
 const ChatWindow = () => {
   const [modal, setModal] = useState(false);
   const sortRoom = useSelector((state) => state.room.room);
-  const user = localStorage.getItem("id");
 
   const dispath = useDispatch();
 
@@ -25,7 +24,7 @@ const ChatWindow = () => {
   };
 
   useEffect(() => {
-    dispath(fetchRoom({ id: user }));
+    dispath(fetchRoom({ id: localStorage.getItem("id") }));
   }, [dispath]);
 
   return (

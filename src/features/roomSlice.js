@@ -123,7 +123,7 @@ export const addComment = createAsyncThunk(
         },
         body: JSON.stringify({ user, comment, time }),
       });
-      const addComment = await res.json();
+      // const addComment = await res.json();
       return { _id: id, user, comment };
     } catch (error) {
       thunkAPI.rejectWithValue(error);
