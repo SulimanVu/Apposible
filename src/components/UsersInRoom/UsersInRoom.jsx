@@ -22,14 +22,12 @@ const UsersInRoom = () => {
           <div className={styles.body} key={item._id}>
             <div
               className={
-                item._id === localStorage.getItem("id")
-                  ? styles.you
-                  : styles.outher
+                item._id === room.admin._id ? styles.you : styles.outher
               }
             >
               {item.name}
             </div>
-            {item._id !== localStorage.getItem("id") ? (
+            {item._id !== room.admin._id ? (
               <img
                 src={require("../../images/delete.png")}
                 onClick={() => handleDelete(item._id)}

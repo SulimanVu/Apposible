@@ -43,10 +43,10 @@ const ChatInfo = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchRoom());
+    dispatch(fetchRoom({ id: localStorage.getItem("id") }));
     dispatch(fetchTasksInRoom(id));
     dispatch(fetchUsers());
-  }, [dispatch, id, user]);
+  }, [dispatch, id, room]);
 
   return (
     <div className={styles.main} onClick={(e) => handleClose(e)}>
