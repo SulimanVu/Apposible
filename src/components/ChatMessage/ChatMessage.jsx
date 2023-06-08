@@ -79,8 +79,8 @@ const Chat = () => {
 
   useEffect(() => {
     dispath(fetchUsers());
-    dispath(fetchRoom({ id: userID }));
-  }, [dispath, userID]);
+    dispath(fetchRoom({ id: localStorage.getItem("id") }));
+  }, [dispath]);
 
   return (
     <div className={styles.bg}>
