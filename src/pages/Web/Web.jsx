@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 import styles from "./web.module.scss";

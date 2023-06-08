@@ -8,9 +8,13 @@ export default function WebRTC(roomID) {
 
   const addNewClient = useCallback(
     (newClient, cb) => {
-      if (!clients.includes(newClient)) {
-        setClients((list) => [...list, newClient], cb);
-      }
+      setClients((list) => {
+        if (!list.includes(newClient)) {
+          return [...list, newClient];
+        }
+
+        return list;
+      }, cb);
     },
     [clients, setClients]
   );
@@ -48,6 +52,19 @@ export default function WebRTC(roomID) {
           addNewClient(peerID, () => {
             peerMediaElements.current[peerID].srcObject = remoteStream;
           });
+        } else {
+          // FIX LONG RENDER IN CASE OF MANY CLIENTS
+          let settled = false;
+          const interval = setInterval(() => {
+            if (peerMediaElements.current[peerID]) {
+              peerMediaElements.current[peerID].srcObject = remoteStream;
+              settled = true;
+            }
+
+            if (settled) {
+              clearInterval(interval);
+            }
+          }, 1000);
         }
       };
 
@@ -73,13 +90,17 @@ export default function WebRTC(roomID) {
   }, []);
 
   useEffect(() => {
-    async function setRemoteMedia({ peerID, sessionDescription }) {
-      await peerConnections.current[peerID].setRemoteDescription(
-        new RTCSessionDescription(sessionDescription)
+    async function setRemoteMedia({
+      peerID,
+      sessionDescription: remoteDescription,
+    }) {
+      await peerConnections.current[peerID]?.setRemoteDescription(
+        new RTCSessionDescription(remoteDescription)
       );
 
-      if (sessionDescription.type === "offer") {
+      if (remoteDescription.type === "offer") {
         const answer = await peerConnections.current[peerID].createAnswer();
+
         await peerConnections.current[peerID].setLocalDescription(answer);
 
         socket.emit("relay-sdp", {
@@ -90,6 +111,10 @@ export default function WebRTC(roomID) {
     }
 
     socket.on("session-description", setRemoteMedia);
+
+    return () => {
+      socket.off("session-description");
+    };
   }, []);
 
   useEffect(() => {
@@ -101,7 +126,7 @@ export default function WebRTC(roomID) {
   }, []);
 
   useEffect(() => {
-    const handleRemovePeer = ({ peerID }) => {
+    socket.on("remove-peer", ({ peerID }) => {
       if (peerConnections.current[peerID]) {
         peerConnections.current[peerID].close();
       }
@@ -110,9 +135,7 @@ export default function WebRTC(roomID) {
       delete peerMediaElements.current[peerID];
 
       setClients((list) => list.filter((c) => c !== peerID));
-    };
-
-    socket.on("remove-peer", handleRemovePeer);
+    });
   }, []);
 
   useEffect(() => {

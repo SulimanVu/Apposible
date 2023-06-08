@@ -2,27 +2,60 @@ import { useParams } from "react-router-dom";
 import styles from "./webRoom.module.scss";
 import useWebRTC from "../../hooks/useWebRTC";
 
-const WebRoom = () => {
-  const { id: roomID } = useParams();
-  const {clients, provideMediaRef} = useWebRTC(roomID);
+function layout(clientsNumber = 1) {
+  const pairs = Array.from({ length: clientsNumber }).reduce(
+    (acc, next, index, arr) => {
+      if (index % 2) {
+        acc.push(arr.slice(index, index + 2));
+      }
+      return acc;
+    },
+    []
+  );
 
-  console.log(clients);
-  return <div className={styles.webRoom}>
-    {clients.map(clientId=>{
-        return(
-            <div key={clientId}>
-                <video
-                ref={instance =>{
-                    provideMediaRef(clientId, instance)
-                }}
-                autoPlay
-                playsInline
-                muted={clientId === "LOCAL_VIDEO"} 
-                src="" />
-            </div>
-        )
-    })}
-  </div>;
+  const rowsNumber = pairs.length;
+  const height = `${100 / rowsNumber}%`;
+
+  return pairs
+    .map((row, index, arr) => {
+      if (index === arr.length - 1 && row.length === 1) {
+        return [
+          {
+            width: "80%",
+            height,
+          },
+        ];
+      }
+      return row.map(() => ({
+        width: "50%",
+        height,
+      }));
+    })
+    .flat();
+}
+const WebRoom = () => {
+  const { id } = useParams();
+  const { clients, provideMediaRef } = useWebRTC(id);
+  const videoLayout = layout(clients.length);
+
+  return (
+    <div className={styles.webRoom}>
+      {clients.map((clientId, index) => {
+        return (
+          <div key={clientId} style={videoLayout[index]}>
+            <video
+              ref={(instance) => {
+                provideMediaRef(clientId, instance);
+              }}
+              autoPlay
+              playsInline
+              muted={clientId === ["LOCAL_VIDEO"]}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default WebRoom;

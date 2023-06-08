@@ -18,17 +18,15 @@ import { useDispatch } from "react-redux";
 import {
   deleteFile,
   downloadFile,
-  fetchFile
+  fetchFile,
 } from "../../../../features/fileSlice";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const File = ({ file }) => {
   const { id } = useParams();
-  const navigate = useNavigate()
   const dispatch = useDispatch();
   const image = ["img", "jpeg", "jpg", "svg", "png"];
 
-  console.log(file);
   const handleOpenDir = () => {
     dispatch(fetchFile({ parent: file._id, room: id }));
     localStorage.setItem("dir", file._id);
