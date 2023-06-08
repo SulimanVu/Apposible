@@ -79,8 +79,8 @@ const Chat = () => {
 
   useEffect(() => {
     dispath(fetchUsers());
-    dispath(fetchRoom({id:userID}));
-  }, [dispath]);
+    dispath(fetchRoom({ id: userID }));
+  }, [dispath, userID]);
 
   return (
     <div className={styles.bg}>
