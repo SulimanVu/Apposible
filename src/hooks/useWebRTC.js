@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef } from "react";
 import useStateWithCallBack from "./useStateWithCallBack";
 import { socket } from "../components/ChatForm/ChatForm";
-import { freeice } from "freeice";
+import freeice from "freeice";
+
+const LOCAL_VIDEO = "LOCAL_VIDEO";
 
 export default function WebRTC(roomID) {
   const [clients, setClients] = useStateWithCallBack([]);
@@ -16,12 +18,12 @@ export default function WebRTC(roomID) {
         return list;
       }, cb);
     },
-    [clients, setClients]
+    [setClients]
   );
 
   const peerConnections = useRef({});
   const localMediaStream = useRef(null);
-  const peerMediaElements = useRef({ ["LOCAL_VIDEO"]: null });
+  const peerMediaElements = useRef({ [LOCAL_VIDEO]: null });
 
   useEffect(() => {
     async function handleNewPeer({ peerID, createOffer }) {
@@ -87,7 +89,7 @@ export default function WebRTC(roomID) {
     }
 
     socket.on("add-peer", handleNewPeer);
-  }, []);
+  }, [addNewClient]);
 
   useEffect(() => {
     async function setRemoteMedia({
@@ -118,15 +120,19 @@ export default function WebRTC(roomID) {
   }, []);
 
   useEffect(() => {
-    socket.on("ice-candidate", (peerID, iceCandidate) => {
-      peerConnections.current[peerID].addIceCandidate(
+    socket.on("ice-candidate", ({ peerID, iceCandidate }) => {
+      peerConnections.current[peerID]?.addIceCandidate(
         new RTCIceCandidate(iceCandidate)
       );
     });
+
+    return () => {
+      socket.off("ice-candidate");
+    };
   }, []);
 
   useEffect(() => {
-    socket.on("remove-peer", ({ peerID }) => {
+    const handleRemovePeer = ({ peerID }) => {
       if (peerConnections.current[peerID]) {
         peerConnections.current[peerID].close();
       }
@@ -135,8 +141,14 @@ export default function WebRTC(roomID) {
       delete peerMediaElements.current[peerID];
 
       setClients((list) => list.filter((c) => c !== peerID));
-    });
-  }, []);
+    };
+
+    socket.on("remove-peer", handleRemovePeer);
+
+    return () => {
+      socket.off("remove-peer");
+    };
+  }, [setClients]);
 
   useEffect(() => {
     async function startCapture() {
@@ -148,8 +160,8 @@ export default function WebRTC(roomID) {
         },
       });
 
-      addNewClient("LOCAL_VIDEO", () => {
-        const localVideoElement = peerMediaElements.current["LOCAL_VIDEO"];
+      addNewClient(LOCAL_VIDEO, () => {
+        const localVideoElement = peerMediaElements.current[LOCAL_VIDEO];
 
         if (localVideoElement) {
           localVideoElement.volume = 0;
@@ -157,6 +169,7 @@ export default function WebRTC(roomID) {
         }
       });
     }
+
     startCapture()
       .then(() => socket.emit("join_web", { room: roomID }))
       .catch((e) => console.error("Error getting UserMedia:", e));
@@ -166,7 +179,7 @@ export default function WebRTC(roomID) {
 
       socket.emit("leave");
     };
-  }, [roomID]);
+  }, [roomID, addNewClient]);
 
   const provideMediaRef = useCallback((id, node) => {
     peerMediaElements.current[id] = node;
