@@ -1,3 +1,44 @@
-.web{
+@import "../../index.scss";
+.web {
   margin-left: 20px;
+  color: #fff;
+  p{
+    font-size: 20px;
+  }
+  ul {
+    list-style-type: none;
+    li {
+      box-sizing: border-box;
+      button {
+        border-radius: 7px;
+        padding: 5px 10px;
+        background-color: $b-green;
+        color: #fff;
+        margin-left: 20px;
+        border: 1px solid transparent;
+        box-sizing: border-box;
+        transition: 0.5s;
+        &:hover {
+          border: 1px solid $b-green;
+          color: $b-green;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+  button {
+    border-radius: 7px;
+    padding: 5px 10px;
+    background-color: $b-green;
+    color: #fff;
+    margin-left: 20px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    transition: 0.5s;
+    &:hover {
+      border: 1px solid $b-green;
+      color: $b-green;
+      background-color: #fff;
+    }
+  }
 }
