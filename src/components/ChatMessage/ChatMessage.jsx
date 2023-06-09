@@ -6,6 +6,7 @@ import styles from "./chatmessage.module.scss";
 import { socket } from "../ChatForm/ChatForm";
 import { fetchUsers } from "../../features/applicationSlice";
 import Disk from "../Disk/Disk";
+import Web from "../../pages/Web/Web";
 
 const Chat = () => {
   const { id } = useParams();
@@ -159,7 +160,10 @@ const Chat = () => {
             />
           </div>
         </div>
-        <Disk />
+        <div className={styles.rightBlock}>
+          <Disk />
+          <Web />
+        </div>
       </div>
     </div>
   );

@@ -19,17 +19,17 @@ const Web = () => {
 
   return (
     <div ref={rootNode} className={styles.web}>
-      <h1>Available Rooms</h1>
+      {rooms?.length !== 0 && <p>Открытые комнаты для подключения:</p>}
       <ul>
         {rooms?.map((roomID) => (
           <li key={roomID}>
             {roomID}
             <button
               onClick={() => {
-                navigate(`/room/web/${v4(roomID)}`);
+                navigate(`/room/web/${roomID}`);
               }}
             >
-              JOIN ROOM
+              Подключиться
             </button>
           </li>
         ))}
@@ -39,7 +39,7 @@ const Web = () => {
           navigate(`/room/web/${v4()}`);
         }}
       >
-        CREATE NEW ROOM
+        Начать видео-звонок
       </button>
     </div>
   );

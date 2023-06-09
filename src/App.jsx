@@ -9,8 +9,7 @@ import SignIn from "./components/Login/SignIn";
 import SignUp from "./components/Registr/SignUp";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import ChatInfo from "./pages/ChatInfo/ChatInfo";
-import Web from "./pages/Web/Web";
-import WebRoom from "./components/WebRoom/WebRoom";
+import WebRoom from "./pages/WebRoom/WebRoom";
 
 function App() {
   const location = useLocation();
@@ -30,7 +29,6 @@ function App() {
         <Route path="/login" element={<FormRegistration />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/web" element={<Web />} />
         <Route path="/room/web/:id" element={<WebRoom />} />
         {/* <Route path={`/api/files/file/:name`} element={<Doc />} /> */}
 

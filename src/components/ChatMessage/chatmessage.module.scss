@@ -16,6 +16,11 @@
 .chatWindow {
   display: flex;
   width: 100%;
+  .rightBlock {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
   @media screen and (max-width: 800px) {
     flex-direction: column;
     width: 100%;
