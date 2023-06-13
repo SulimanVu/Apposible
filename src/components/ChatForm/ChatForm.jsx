@@ -4,9 +4,7 @@ import styles from "./chatform.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteRoom } from "../../features/roomSlice";
-// import { serverUrl } from "../../serverUrl";
 
-// export const socket = io.connect(serverUrl);
 export const socket = io.connect("http://localhost:3001");
 
 const ChatForm = ({ name, roomID, access }) => {
