@@ -1,29 +1,30 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
-.modal{
-    position: absolute;
-    background-color: #fff;
-    border-radius: 15px;
-    width: 70%;
-    color: black;
-    z-index: 100;
-    padding: 5px 10px 0px 10px;
-    top: 30px;
-    right: 20px;
-    .name{
-        margin-bottom: 5px;
-        border-radius: 10px;
-        padding: 5px 10px;
-        background-color: $b-green;
-        color: $orange;
-        cursor: pointer;
-        transition: .4s;
-        &:hover{
-            color: $yellow;
-        }
+.modal {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 15px;
+  width: 20%;
+  color: black;
+  z-index: 100;
+  padding: 5px 10px 0px 10px;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .name {
+    margin-bottom: 5px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: $b-green;
+    color: $orange;
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover {
+      color: $yellow;
     }
-    .close{
-        text-align: end;
-        margin-bottom: 10px;
-    }
+  }
+  .close {
+    text-align: end;
+    margin-bottom: 10px;
+  }
 }
