@@ -1,6 +1,5 @@
 @import "../../index.scss";
 .container {
-  padding-top: 200px;
   background: linear-gradient(to right, rgb(0 0 0 / 0.7), rgb(0 0 0 / 0)),
     url("../../images/profile-bg.jpg");
   background-repeat: no-repeat;
@@ -14,6 +13,7 @@
     padding-left: 0;
   }
   .main {
+    margin: auto;
     height: 300px;
     color: red;
     display: flex;

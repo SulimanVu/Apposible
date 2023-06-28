@@ -5,19 +5,19 @@ const Footer = () => {
   return (
     <footer>
       <ul className={styles.trend}>
-        <h2>Trending Links</h2>
-        <li>Class Shedules</li>
-        <li>Apply Online</li>
-        <li>Programs</li>
+        <h2>Трендовые ссылки</h2>
+        <li>Подписки</li>
+        <li>Онлафн оплата</li>
+        <li>Программы</li>
       </ul>
       <ul className={styles.contact}>
-        <h2>Contact Us</h2>
-        <li>Community College</li>
-        <li>Springfield</li>
-        <li>+7(906) 525-34-97</li>
+        <h2>Контактные данные</h2>
+        <li>sssuliman@bk.ru</li>
+        <li>havagapaeva@mail.ru</li>
+        <li>+7 (906) 525-34-97</li>
       </ul>
       <div className={styles.follow}>
-        Follow Us
+        Подпишись на нас
         <ul>
           <li>
             <a href="#">

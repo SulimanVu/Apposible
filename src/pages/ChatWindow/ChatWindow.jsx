@@ -33,9 +33,9 @@ const ChatWindow = () => {
       <div className={styles.header}>
         <button onClick={(e) => handleAdd(e)}>Добавить комнату</button>
       </div>
-      {sortRoom?.map((item) => {
+      {sortRoom?.map((item, index) => {
         return (
-          <div key={item._id}>
+          <div key={index}>
             <ChatForm
               name={item.name}
               users={item.users}

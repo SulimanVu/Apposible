@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createRoom } from "../../features/roomSlice";
+import { createRoom, fetchRoom } from "../../features/roomSlice";
 import styles from "./modal.module.scss";
 
 const Modal = () => {
@@ -15,6 +15,7 @@ const Modal = () => {
   const handleAddRoom = () => {
     if (roomName.length > 0) {
       dispath(createRoom({ id: user, name: roomName, admin: user }));
+      dispath(fetchRoom({ id: localStorage.getItem("id") }));
     }
   };
 

@@ -17,9 +17,16 @@
   display: flex;
   width: 100%;
   .rightBlock {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    width: 90%;
+    @media screen and (max-width: 800px) {
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
   }
   @media screen and (max-width: 800px) {
     flex-direction: column;
@@ -29,7 +36,7 @@
   }
 }
 .main {
-  width: 40%;
+  width: 70%;
   border-radius: 8px;
   background-color: $b-green;
   height: 80vh;
