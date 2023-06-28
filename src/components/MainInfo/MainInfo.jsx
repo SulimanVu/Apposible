@@ -42,10 +42,8 @@ const MainInfo = () => {
           другие.
         </motion.p>
       </div>
-      <div className={styles.container}>
-        <p
-          
-        >
+      <div className={styles.container2}>
+        <p>
           Хотите работать в команде и всегда оставаться на связи?
           <br />
           <br />
@@ -54,9 +52,6 @@ const MainInfo = () => {
         </p>
         <div className={styles.img_block_2}>
           <img
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1.8 }}
             src={require("../../images/team_image.png")}
             alt="#"
           />

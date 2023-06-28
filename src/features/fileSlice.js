@@ -46,7 +46,7 @@ export const getFile = createAsyncThunk(
 
       const data = await res.json();
       return data;
-      
+
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -67,7 +67,7 @@ export const addDir = createAsyncThunk(
         body: JSON.stringify({ name, type, parent, room }),
       });
 
-      const data = await res.json();
+      const data = await res.json()
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

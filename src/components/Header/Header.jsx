@@ -26,10 +26,10 @@ const Header = () => {
               to="/chat"
               className={chat ? `${styles.link} ${styles.active}` : styles.link}
             >
-              <li>Chat</li>
+              <li>Комната</li>
             </Link>
           ) : (
-            <li className={styles.link_off}>Chat</li>
+            <li className={styles.link_off}>Комната</li>
           )}
 
           {token ? (
@@ -39,14 +39,14 @@ const Header = () => {
                 profile ? `${styles.link} ${styles.active}` : styles.link
               }
             >
-              <li>profile</li>
+              <li>Профиль</li>
             </Link>
           ) : (
-            <li className={styles.link_off}>profile</li>
+            <li className={styles.link_off}>Профиль</li>
           )}
 
           <Link to="/login" className={styles.link}>
-            <li className={styles.link_mg}>sign in / sign up</li>
+            <li className={styles.link_mg}>Вход / Авторизация</li>
           </Link>
         </ul>
       </div>
