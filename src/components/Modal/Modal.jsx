@@ -15,7 +15,6 @@ const Modal = () => {
   const handleAddRoom = () => {
     if (roomName.length > 0) {
       dispath(createRoom({ id: user, name: roomName, admin: user }));
-      dispath(fetchRoom({ id: localStorage.getItem("id") }));
     }
   };
 

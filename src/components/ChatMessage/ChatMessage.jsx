@@ -18,12 +18,8 @@ const Chat = () => {
   const [messageList, setMessageList] = useState([]);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current.scrollTop = messagesEndRef.current?.scrollHeight;
   };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messageList]);
 
   const messages = useSelector((state) =>
     state.room.room.find((message) => {
@@ -73,6 +69,10 @@ const Chat = () => {
   };
 
   useEffect(() => {
+    scrollToBottom();
+  }, [messageList, messages]);
+
+  useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
@@ -94,7 +94,7 @@ const Chat = () => {
               onClick={handleRouteRoom}
             />
           </div>
-          <div className={styles.chatForm}>
+          <div ref={messagesEndRef} className={styles.chatForm}>
             <div className={styles.body}>
               {messages?.users.map((item) => {
                 return (
@@ -145,8 +145,6 @@ const Chat = () => {
                 );
               })}
             </div>
-
-            <div ref={messagesEndRef} />
           </div>
           <div className={styles.footer}>
             <input

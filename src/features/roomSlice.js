@@ -37,7 +37,7 @@ export const createRoom = createAsyncThunk(
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
         },
-        body: JSON.stringify({ name, access: id, admin: name }),
+        body: JSON.stringify({ name }),
       });
 
       const room = await res.json();
@@ -60,8 +60,9 @@ export const deleteRoom = createAsyncThunk(
           Authorization: "Bearer " + token,
         },
       });
+
       const delRoom = await res.json();
-      return id;
+      return delRoom;
     } catch (error) {
       thunkAPI.rejectWithValue(error);
     }
@@ -109,7 +110,7 @@ export const deleteUser = createAsyncThunk(
     }
   }
 );
-//////ОБЯЗАТЕЛЬНО ПЕРЕДЕЛАТЬ ЭТОТ THUNK///////////
+
 export const addComment = createAsyncThunk(
   "addComment/room",
   async ({ id, user, comment, time }, thunkAPI) => {
@@ -123,8 +124,8 @@ export const addComment = createAsyncThunk(
         },
         body: JSON.stringify({ user, comment, time }),
       });
-      // const addComment = await res.json();
-      return { _id: id, user, comment };
+
+      return res.json();
     } catch (error) {
       thunkAPI.rejectWithValue(error);
     }
@@ -150,7 +151,9 @@ const roomSlice = createSlice({
       })
       //////////DELETE-ROOM///////////
       .addCase(deleteRoom.fulfilled, (state, action) => {
-        state.room = state.room.filter((item) => item._id !== action.payload);
+        state.room = state.room.filter(
+          (item) => item._id !== action.payload._id
+        );
         state.loader = false;
       })
       .addCase(deleteRoom.pending, (state, action) => {

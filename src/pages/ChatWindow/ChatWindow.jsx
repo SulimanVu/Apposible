@@ -10,6 +10,7 @@ const ChatWindow = () => {
   const [modal, setModal] = useState(false);
   const sortRoom = useSelector((state) => state.room.room);
 
+  console.log(sortRoom);
   const dispath = useDispatch();
 
   const handleAdd = (e) => {
@@ -36,12 +37,7 @@ const ChatWindow = () => {
       {sortRoom?.map((item, index) => {
         return (
           <div key={index}>
-            <ChatForm
-              name={item.name}
-              users={item.users}
-              access={item.access}
-              roomID={item._id}
-            />
+            <ChatForm {...item} />
           </div>
         );
       })}

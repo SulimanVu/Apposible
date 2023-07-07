@@ -7,21 +7,21 @@ import { deleteRoom } from "../../features/roomSlice";
 
 export const socket = io.connect("http://localhost:3001");
 
-const ChatForm = ({ name, roomID }) => {
+const ChatForm = ({ name, _id }) => {
   const username = useSelector((state) => state.application.login);
   const dispath = useDispatch();
   const navigate = useNavigate();
 
   const joinRoom = () => {
-    if (username !== "" && roomID !== "") {
-      socket.emit("join_room", roomID);
-      navigate(`/room/${roomID}`);
+    if (username !== "" && _id !== "") {
+      socket.emit("join_room", _id);
+      navigate(`/room/${_id}`);
     }
   };
-
+  console.log(_id);
   const handleDelete = (e) => {
     e.stopPropagation();
-    dispath(deleteRoom({ id: roomID }));
+    dispath(deleteRoom({ id: _id }));
   };
 
   return (
